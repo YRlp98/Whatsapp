@@ -4,6 +4,7 @@ class SignInAnimation extends StatelessWidget {
   final Animation<double> controller;
   final Animation<double> buttonSqueezeAnimation;
   final Animation<double> buttonZoomOut;
+  String test = 'Hello GitHub';
 
   SignInAnimation({this.controller})
       : buttonSqueezeAnimation = new Tween(begin: 280.0, end: 60.0).animate(
