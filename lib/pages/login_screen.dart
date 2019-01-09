@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _loginButtonController;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -61,7 +62,7 @@ class LoginScreenState extends State<LoginScreen>
             new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new FormContainer(),
+                new FormContainer(formKey: _formKey),
                 new FlatButton(
                     onPressed: null,
                     child: Text(
@@ -76,6 +77,9 @@ class LoginScreenState extends State<LoginScreen>
             ),
             new GestureDetector(
               onTap: () async {
+                if (_formKey.currentState.validate()) {
+                  print('Do STH');
+                }
                 await _loginButtonController.forward();
                 await _loginButtonController.reverse();
               },
