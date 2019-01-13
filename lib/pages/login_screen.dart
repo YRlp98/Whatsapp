@@ -15,6 +15,16 @@ class LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _loginButtonController;
   final _formKey = GlobalKey<FormState>();
+  String _emailValue;
+  String _passwordValue;
+
+  emailOnSaved(String value) {
+    _emailValue = value;
+  }
+
+  passwordOnSaved(String value) {
+    _passwordValue = value;
+  }
 
   @override
   void initState() {
@@ -62,7 +72,10 @@ class LoginScreenState extends State<LoginScreen>
             new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new FormContainer(formKey: _formKey),
+                new FormContainer(
+                    formKey: _formKey,
+                    emailOnSaved: emailOnSaved,
+                    passwordOnSaved: passwordOnSaved),
                 new FlatButton(
                     onPressed: null,
                     child: Text(
@@ -78,7 +91,11 @@ class LoginScreenState extends State<LoginScreen>
             new GestureDetector(
               onTap: () async {
                 if (_formKey.currentState.validate()) {
-                  print('Do STH');
+                  _formKey.currentState.save();
+                  print('=== HTTP Request:');
+                  print(_emailValue);
+                  print(_passwordValue);
+                  print('========================');
                 }
                 await _loginButtonController.forward();
                 await _loginButtonController.reverse();
