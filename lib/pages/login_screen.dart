@@ -92,13 +92,8 @@ class LoginScreenState extends State<LoginScreen>
               onTap: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  print('=== HTTP Request:');
-                  print(_emailValue);
-                  print(_passwordValue);
-                  print('========================');
+                  sendDataForLogin();
                 }
-                await _loginButtonController.forward();
-                await _loginButtonController.reverse();
               },
               child:
                   new SignInAnimation(controller: _loginButtonController.view),
@@ -107,5 +102,9 @@ class LoginScreenState extends State<LoginScreen>
         ),
       ),
     );
+  }
+
+  void sendDataForLogin() async {
+    await _loginButtonController.animateTo(0.150);
   }
 }
