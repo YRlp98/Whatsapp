@@ -107,4 +107,9 @@ class LoginScreenState extends State<LoginScreen>
   void sendDataForLogin() async {
     await _loginButtonController.animateTo(0.150);
   }
+
+  Future sendDataToServer() async {
+    await _loginButtonController.forward();
+    await _loginButtonController.reverse();
+  }
 }
