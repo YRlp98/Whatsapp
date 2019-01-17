@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'camera_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     startTime();
+    checkLogin();
   }
 
   @override
@@ -66,5 +68,10 @@ class SplashScreenState extends State<SplashScreen> {
                 ))
           ],
         ));
+  }
+
+  void checkLogin() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    print(preferences.getString('user.api_token'));
   }
 }

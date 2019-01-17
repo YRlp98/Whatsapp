@@ -114,7 +114,7 @@ class LoginScreenState extends State<LoginScreen>
         .sendDataToLogin({'email': _emailValue, 'password': _passwordValue});
 
     if (response['status'] == 'success') {
-      await storeUserData(response['data']);
+//      await storeUserData(response['data']);
       await _loginButtonController.forward();
       Navigator.pushReplacementNamed(context, '/');
     } else {
