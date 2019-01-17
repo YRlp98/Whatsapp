@@ -7,8 +7,6 @@ class AuthService {
     final response =
         await http.post('http://roocket.org/api/login', body: body);
     var responseBody = json.decode(response.body);
-//    await _loginButtonController.forward();
-//    await _loginButtonController.reverse();
     return responseBody;
   }
 }

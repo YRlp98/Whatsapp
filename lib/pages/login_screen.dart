@@ -16,6 +16,7 @@ class LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _loginButtonController;
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   String _emailValue;
   String _passwordValue;
 
@@ -49,6 +50,7 @@ class LoginScreenState extends State<LoginScreen>
     var page = MediaQuery.of(context).size;
 
     return new Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
       body: new Container(
         decoration: new BoxDecoration(
@@ -107,7 +109,19 @@ class LoginScreenState extends State<LoginScreen>
 
   void sendDataForLogin() async {
     await _loginButtonController.animateTo(0.150);
-    await (new AuthService())
-        .sendDataToLogin({'email': _emailValue, 'passwird': _passwordValue});
+    Map response = await (new AuthService())
+        .sendDataToLogin({'email': _emailValue, 'password': _passwordValue});
+
+    if (response['status'] == 'success') {
+      await _loginButtonController.forward();
+      Navigator.pushReplacementNamed(context, '/');
+    } else {
+      await _loginButtonController.reverse();
+      _scaffoldKey.currentState.showSnackBar(new SnackBar(
+          content: new Text(
+        response['data'],
+        style: new TextStyle(fontFamily: 'Vazir'),
+      )));
+    }
   }
 }
