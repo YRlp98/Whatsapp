@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp/animations/signin_animation.dart';
 import 'package:whatsapp/component/Form.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
-import 'package:http/http.dart' as http;
+import 'package:whatsapp/services/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -107,14 +107,7 @@ class LoginScreenState extends State<LoginScreen>
 
   void sendDataForLogin() async {
     await _loginButtonController.animateTo(0.150);
-    await sendDataToServer();
-  }
-
-  sendDataToServer() async {
-    final response = await http.post('http://roocket.org/api/login',
-        body: {'email': _emailValue, 'password': _passwordValue});
-    print(response.statusCode);
-    await _loginButtonController.forward();
-    await _loginButtonController.reverse();
+    await (new AuthService())
+        .sendDataToLogin({'email': _emailValue, 'passwird': _passwordValue});
   }
 }
