@@ -3,7 +3,7 @@ import 'package:whatsapp/animations/signin_animation.dart';
 import 'package:whatsapp/component/Form.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:whatsapp/services/auth_services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -127,9 +127,9 @@ class LoginScreenState extends State<LoginScreen>
     }
   }
 
-  storeUserData(Map userData) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.setString('user.api_token', userData['api_toekn']);
-    await preferences.setInt('user.api_token', userData['api_id']);
-  }
+//  storeUserData(Map userData) async {
+//    SharedPreferences preferences = await SharedPreferences.getInstance();
+//    await preferences.setString('user.api_token', userData['api_toekn']);
+//    await preferences.setInt('user.api_token', userData['api_id']);
+//  }
 }
