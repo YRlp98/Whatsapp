@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'camera_screen.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity/connectivity.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SplashScreenState extends State<SplashScreen> {
+
   startTime() {
     var _duration = Duration(seconds: 2);
     return Timer(_duration, navigationPage);
@@ -27,7 +29,7 @@ class SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     startTime();
-//    checkLogin();
+    checkLogin();
   }
 
   @override
@@ -70,8 +72,22 @@ class SplashScreenState extends State<SplashScreen> {
         ));
   }
 
-//  void checkLogin() async {
+  void checkLogin() async {
 //    SharedPreferences preferences = await SharedPreferences.getInstance();
 //    print(preferences.getString('user.api_token', userData['api_token']));
-//  }
+
+  if (await checkConnectionInternet()) {
+
+  } else {
+
+  }
+
+  }
+
+  Future<bool> checkConnectionInternet() async{
+    var connectivityResult = await (new Connectivity().checkConnectivity());
+    print(connectivityResult);
+    return false;
+  }
+
 }
