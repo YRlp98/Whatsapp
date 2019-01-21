@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/call_screen.dart';
 import 'pages/camera_screen.dart';
 import 'pages/chat_screen.dart';
-import 'pages/status_screen.dart';
+import 'pages/products_screen.dart';
 import 'pages/create-chat_screen.dart';
 import 'pages/settings_screen.dart';
 
@@ -42,7 +42,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
               text: 'چت ها',
             ),
             Tab(
-              text: 'وضعیت',
+              text: 'محصولات',
             ),
             Tab(
               text: 'تماس ها',
@@ -127,7 +127,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
             ? TabBarView(controller: tabController, children: <Widget>[
                 CameraScreen(),
                 ChatScreen(),
-                StatusScreen(),
+                ProductsScreen(),
                 CallScreen()
               ])
             : Center(
