@@ -9,4 +9,16 @@ class AuthService {
     var responseBody = json.decode(response.body);
     return responseBody;
   }
+
+  static Future<bool> checkApiToken(String apiToken) async {
+    final response = await http.get(
+        'http://roocket.org/api/user?api_token=${apiToken}',
+        headers: {'Accept': 'application/json'});
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

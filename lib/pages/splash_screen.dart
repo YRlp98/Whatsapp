@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'camera_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:whatsapp/services/auth_services.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,21 +14,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SplashScreenState extends State<SplashScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  startTime() {
-    var _duration = Duration(seconds: 2);
-    return Timer(_duration, navigationPage);
+//  startTime() {
+//    var _duration = Duration(seconds: 2);
+//    return Timer(_duration, navigationPageToLogin);
+//  }
+
+  navigationToLogin() {
+    Navigator.of(context).pushReplacementNamed('login_screen');
   }
 
-  navigationPage() {
-    Navigator.of(context).pushReplacementNamed('login_screen');
+  navigationToHome() {
+    Navigator.of(context).pushReplacementNamed('/');
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    startTime();
+//    startTime();
     checkLogin();
   }
 
@@ -36,6 +41,7 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Color(0xff075e54),
         body: Stack(
           fit: StackFit.expand,
@@ -73,21 +79,40 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void checkLogin() async {
-//    SharedPreferences preferences = await SharedPreferences.getInstance();
-//    print(preferences.getString('user.api_token', userData['api_token']));
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+//    await preferences.remove('user.api_token');
+    String apiToken = preferences.getString('user.api_token');
 
-  if (await checkConnectionInternet()) {
+//    if (apiToken == null) navigationToLogin();
 
-  } else {
-
+    if (await checkConnectionInternet()) {
+      await AuthService.checkApiToken(apiToken)
+          ? navigationToHome()
+          : navigationToLogin();
+    } else {
+      _scaffoldKey.currentState.showSnackBar(new SnackBar(
+          duration: new Duration(hours: 2),
+          content: new GestureDetector(
+            onTap: () {
+              _scaffoldKey.currentState.hideCurrentSnackBar();
+              checkLogin();
+            },
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text('Check internet connecton',
+                    style: TextStyle(fontFamily: 'Vazir')),
+                new Icon(Icons.signal_wifi_off, color: Colors.white)
+              ],
+            ),
+          )));
+    }
   }
 
-  }
-
-  Future<bool> checkConnectionInternet() async{
+  Future<bool> checkConnectionInternet() async {
     var connectivityResult = await (new Connectivity().checkConnectivity());
     print(connectivityResult);
-    return false;
+    return connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi;
   }
-
 }
