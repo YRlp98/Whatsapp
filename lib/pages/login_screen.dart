@@ -128,8 +128,8 @@ class LoginScreenState extends State<LoginScreen>
   }
 
   storeUserData(Map userData) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.setString('user.api_token', userData['api_toekn']);
-    await preferences.setInt('user.user_id', userData['api_id']);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user.api_token', userData['api_token']);
+    await prefs.setInt('user.user_id', userData['user_id']);
   }
 }

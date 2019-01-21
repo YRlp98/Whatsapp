@@ -86,6 +86,7 @@ class SplashScreenState extends State<SplashScreen> {
 //    if (apiToken == null) navigationToLogin();
 
     if (await checkConnectionInternet()) {
+//      Check api Token
       await AuthService.checkApiToken(apiToken)
           ? navigationToHome()
           : navigationToLogin();
