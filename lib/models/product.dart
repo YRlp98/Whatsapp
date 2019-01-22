@@ -13,7 +13,7 @@ class Product {
     userId = parsedJson['userId'];
     title = parsedJson['title'];
     body = parsedJson['body'];
-    image = parsedJson['iamge'];
+    image = parsedJson['image'];
     price = parsedJson['price'];
     createdAt = parsedJson['createdAt'];
     updatedAt = parsedJson['updatedAt'];

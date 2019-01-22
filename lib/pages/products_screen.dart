@@ -29,13 +29,31 @@ class ProductsScreenState extends State<ProductsScreen> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
+//  Show Items as ListView
+  Widget streamListView() {
     return new ListView.builder(
+        padding: const EdgeInsets.only(top: 0),
         itemCount: _products.length,
         itemBuilder: (BuildContext context, int index) {
           return new ProductCard(product: _products[index]);
         });
+  }
+
+//  Show Items as GridView
+  Widget moduleListView() {
+    return new GridView.builder(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        padding: const EdgeInsets.only(top: 0),
+        itemCount: _products.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new ProductCard(product: _products[index]);
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return moduleListView();
   }
 }

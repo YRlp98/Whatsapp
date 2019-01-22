@@ -23,6 +23,7 @@ dependencies:
   http: ^0.12.0+1
   shared_preferences: ^0.4.3
   connectivity: ^0.3.2
+  cached_network_image: ^0.5.1
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +44,7 @@ flutter:
   assets:
     - assets/images/whatsapp_start_icon.png
     - assets/images/icon_background.png
+    - assets/images/placeholder_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
