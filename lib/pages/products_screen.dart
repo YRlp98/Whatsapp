@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/component/product_card.dart';
 import 'package:whatsapp/models/product.dart';
 import 'package:whatsapp/services/product_services.dart';
 
@@ -31,11 +32,10 @@ class ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Center(
-      child: Text(
-        'Products',
-        style: TextStyle(fontSize: 20.0),
-      ),
-    );
+    return new ListView.builder(
+        itemCount: _products.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new ProductCard(product: _products[index]);
+        });
   }
 }
