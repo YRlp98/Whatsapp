@@ -14,20 +14,37 @@ class ProductsScreenState extends State<ProductsScreen>
   int _currentPage = 1;
   bool _viewStream = true;
   bool _isLoading = true;
+  ScrollController _listScrollController = new ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _getProducts();
+    _listScrollController.addListener(() {
+      double maxScroll = _listScrollController.position.maxScrollExtent;
+      double currentScroll = _listScrollController.position.pixels;
+
+      if (maxScroll - currentScroll <= 200) {
+        if (!_isLoading) {
+          _getProducts(page: _currentPage + 1);
+        }
+      }
+    });
   }
 
-  void _getProducts({int page = 1}) async {
+  void _getProducts({int page = 1, bool refresh: false}) async {
+    setState(() {
+      _isLoading = true;
+    });
+
     var response = await ProductService.getProducts(page);
 
     setState(() {
+      if (refresh) _products.clear();
+
       _products.addAll(response['products']);
-      _currentPage = response['currentPage'];
+      _currentPage = response['current_page'];
       _isLoading = false;
     });
   }
@@ -44,37 +61,50 @@ class ProductsScreenState extends State<ProductsScreen>
     );
   }
 
+  Future<Null> _handleRefresh() async {
+    await _getProducts(refresh: true);
+    return null;
+  }
+
 //  Show Items as ListView
   Widget streamListView() {
     return _products.length == 0 && _isLoading == true
         ? loadingView()
         : _products.length == 0
             ? listIsEmpty()
-            : new ListView.builder(
-                padding: const EdgeInsets.only(top: 0),
-                itemCount: _products.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return new ProductCard(product: _products[index]);
-                });
+            : new RefreshIndicator(
+                child: new ListView.builder(
+                    padding: const EdgeInsets.only(top: 0),
+                    itemCount: _products.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return new ProductCard(product: _products[index]);
+                    }),
+                onRefresh: _handleRefresh);
   }
 
 //  Show Items as GridView
   Widget moduleListView() {
-    return new GridView.builder(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        padding: const EdgeInsets.only(top: 0),
-        itemCount: _products.length,
-        itemBuilder: (BuildContext context, int index) {
-          return new ProductCard(product: _products[index]);
-        });
+    return _products.length == 0 && _isLoading == true
+        ? loadingView()
+        : _products.length == 0
+            ? listIsEmpty()
+            : new RefreshIndicator(
+                child: new GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
+                    padding: const EdgeInsets.only(top: 0),
+                    itemCount: _products.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return new ProductCard(product: _products[index]);
+                    }),
+                onRefresh: _handleRefresh);
   }
 
   Widget headList() {
     return new SliverAppBar(
       primary: false,
-      pinned: false,
-      backgroundColor: Colors.transparent,
+      pinned: true,
+      backgroundColor: Colors.white54,
       automaticallyImplyLeading: false,
       actions: <Widget>[
 //        ViewStream Icon
@@ -115,6 +145,7 @@ class ProductsScreenState extends State<ProductsScreen>
   Widget build(BuildContext context) {
     // TODO: implement build
     return new NestedScrollView(
+        controller: _listScrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return _products.length != 0 ? <Widget>[headList()] : [];
         },
