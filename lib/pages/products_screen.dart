@@ -12,6 +12,7 @@ class ProductsScreenState extends State<ProductsScreen> {
   List<Product> _products = [];
   int _currentPage = 1;
   bool _viewStream = true;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -22,22 +23,38 @@ class ProductsScreenState extends State<ProductsScreen> {
 
   void _getProducts({int page = 1}) async {
     var response = await ProductService.getProducts(page);
-    print(response['products']);
 
     setState(() {
       _products.addAll(response['products']);
       _currentPage = response['currentPage'];
+      _isLoading = false;
     });
+  }
+
+  Widget loadingView() {
+    return new Center(
+      child: new CircularProgressIndicator(),
+    );
+  }
+
+  Widget listIsEmpty() {
+    return new Center(
+      child: new Text('OPS! There is no products to show'),
+    );
   }
 
 //  Show Items as ListView
   Widget streamListView() {
-    return new ListView.builder(
-        padding: const EdgeInsets.only(top: 0),
-        itemCount: _products.length,
-        itemBuilder: (BuildContext context, int index) {
-          return new ProductCard(product: _products[index]);
-        });
+    return _products.length == 0 && _isLoading == true
+        ? loadingView()
+        : _products.length == 0
+            ? listIsEmpty()
+            : new ListView.builder(
+                padding: const EdgeInsets.only(top: 0),
+                itemCount: _products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return new ProductCard(product: _products[index]);
+                });
   }
 
 //  Show Items as GridView

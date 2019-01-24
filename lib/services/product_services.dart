@@ -5,7 +5,7 @@ import 'package:whatsapp/models/product.dart';
 
 class ProductService {
   static Future<Map> getProducts(int page) async {
-    final response = await http.get('http://roocket.org/api/products?=${page}');
+    final response = await http.get('http://roocket.org/api/products?page=${page}');
 
     if (response.statusCode == 200) {
       var responseBody = json.decode(response.body)['data'];
