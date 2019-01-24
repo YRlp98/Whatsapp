@@ -8,7 +8,8 @@ class ProductsScreen extends StatefulWidget {
   State<StatefulWidget> createState() => new ProductsScreenState();
 }
 
-class ProductsScreenState extends State<ProductsScreen> {
+class ProductsScreenState extends State<ProductsScreen>
+    with AutomaticKeepAliveClientMixin<ProductsScreen> {
   List<Product> _products = [];
   int _currentPage = 1;
   bool _viewStream = true;
@@ -119,4 +120,8 @@ class ProductsScreenState extends State<ProductsScreen> {
         },
         body: _viewStream ? streamListView() : moduleListView());
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
