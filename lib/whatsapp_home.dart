@@ -87,7 +87,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
       ],
     );
 
-    SliverAppBar searchAppBar = SliverAppBar(
+    SliverAppBar searchAppBar = new SliverAppBar(
       pinned: true,
       title: TextField(
         decoration:

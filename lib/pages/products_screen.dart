@@ -11,6 +11,7 @@ class ProductsScreen extends StatefulWidget {
 class ProductsScreenState extends State<ProductsScreen> {
   List<Product> _products = [];
   int _currentPage = 1;
+  bool _viewStream = true;
 
   @override
   void initState() {
@@ -51,9 +52,54 @@ class ProductsScreenState extends State<ProductsScreen> {
         });
   }
 
+  Widget headList() {
+    return new SliverAppBar(
+      primary: false,
+      pinned: false,
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: false,
+      actions: <Widget>[
+//        ViewStream Icon
+        new Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: new GestureDetector(
+            onTap: () {
+              setState(() {
+                _viewStream = true;
+              });
+            },
+            child: new Icon(
+              Icons.view_stream,
+              color: _viewStream ? Colors.grey[700] : Colors.grey[500],
+            ),
+          ),
+        ),
+//        ModuleStream icon
+        new Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: new GestureDetector(
+            onTap: () {
+              setState(() {
+                _viewStream = false;
+              });
+            },
+            child: new Icon(
+              Icons.view_module,
+              color: _viewStream ? Colors.grey[500] : Colors.grey[700],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return moduleListView();
+    return new NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return _products.length != 0 ? <Widget>[headList()] : [];
+        },
+        body: _viewStream ? streamListView() : moduleListView());
   }
 }

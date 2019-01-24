@@ -7,6 +7,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListView.builder(
+      padding: const EdgeInsets.only(top: 0),
         itemCount: dummyDate.length,
         itemBuilder: (context, index) {
           return Column(
