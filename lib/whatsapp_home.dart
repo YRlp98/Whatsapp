@@ -114,37 +114,55 @@ class WhatsAppHomeState extends State<WhatsAppHome>
     };
   }
 
-//  ss
+  Future<bool> _onWillPop() {
+    return showDialog(
+            context: context,
+            builder: (context) {
+              return new AlertDialog(
+                title: new Text('Exit?'),
+                content: new Text('Press Yes to exit'),
+                actions: <Widget>[
+                  new FlatButton(onPressed: null, child: new Text('Yes')),
+                  new FlatButton(onPressed: null, child: new Text('No')),
+                ],
+              );
+            }) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[appBarList[_currentAppBar]];
-        },
-        body: _currentAppBar == 'mainAppBar'
-            ? TabBarView(controller: tabController, children: <Widget>[
-                CameraScreen(),
-                ChatScreen(),
-                ProductsScreen(),
-                CallScreen()
-              ])
-            : Center(
-                child: Text('Search'),
-              ),
-      ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).accentColor,
-          child: Icon(
-            Icons.chat,
-            color: Colors.white,
+    return new WillPopScope(
+        child: new Scaffold(
+          body: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[appBarList[_currentAppBar]];
+            },
+            body: _currentAppBar == 'mainAppBar'
+                ? TabBarView(controller: tabController, children: <Widget>[
+                    CameraScreen(),
+                    ChatScreen(),
+                    ProductsScreen(),
+                    CallScreen()
+                  ])
+                : Center(
+                    child: Text('Search'),
+                  ),
           ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return CreateChatScreen();
-            }));
-          }),
-    );
+          floatingActionButton: FloatingActionButton(
+              backgroundColor: Theme.of(context).accentColor,
+              child: Icon(
+                Icons.chat,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CreateChatScreen();
+                }));
+              }),
+        ),
+        onWillPop: _onWillPop);
   }
 }
