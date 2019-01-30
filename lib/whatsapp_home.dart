@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'pages/call_screen.dart';
 import 'pages/camera_screen.dart';
@@ -126,13 +128,15 @@ class WhatsAppHomeState extends State<WhatsAppHome>
                     content: new Text('Press Yes to exit'),
                     actions: <Widget>[
                       new FlatButton(
-                          onPressed: null,
+                          onPressed: () => Navigator.of(context).pop(false),
                           child: new Text(
                             'No',
                             style: new TextStyle(color: Colors.red),
                           )),
                       new FlatButton(
-                          onPressed: null,
+                          onPressed: () {
+                            exit(0);
+                          },
                           child: new Text(
                             'Yes',
                             style: new TextStyle(
