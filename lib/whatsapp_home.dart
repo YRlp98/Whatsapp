@@ -114,18 +114,33 @@ class WhatsAppHomeState extends State<WhatsAppHome>
     };
   }
 
+//  Exit Dialog
   Future<bool> _onWillPop() {
     return showDialog(
             context: context,
             builder: (context) {
-              return new AlertDialog(
-                title: new Text('Exit?'),
-                content: new Text('Press Yes to exit'),
-                actions: <Widget>[
-                  new FlatButton(onPressed: null, child: new Text('Yes')),
-                  new FlatButton(onPressed: null, child: new Text('No')),
-                ],
-              );
+              return new Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: new AlertDialog(
+                    title: new Text('Exit?'),
+                    content: new Text('Press Yes to exit'),
+                    actions: <Widget>[
+                      new FlatButton(
+                          onPressed: null,
+                          child: new Text(
+                            'No',
+                            style: new TextStyle(color: Colors.red),
+                          )),
+                      new FlatButton(
+                          onPressed: null,
+                          child: new Text(
+                            'Yes',
+                            style: new TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ],
+                  ));
             }) ??
         false;
   }
