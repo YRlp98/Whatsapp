@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Vazir',
           primaryColor: Color(0xff075e54),
           accentColor: Color(0xff25d366)),
-      initialRoute: 'splash_screen',
+//      initialRoute: 'splash_screen',
       routes: {
         '/': (context) => Directionality(
-            textDirection: TextDirection.rtl, child: WhatsAppHome()),
-        'login_screen': (context) => Directionality(
-            textDirection: TextDirection.rtl, child: LoginScreen()),
-        'splash_screen': (context) => Directionality(
             textDirection: TextDirection.rtl, child: SplashScreen()),
+        '/login_screen': (context) => Directionality(
+            textDirection: TextDirection.rtl, child: LoginScreen()),
+        '/home': (context) => Directionality(
+            textDirection: TextDirection.rtl, child: WhatsAppHome()),
         '/settings': (context) => SettingsScreen(),
         '/new_chat': (context) => CreateChatScreen(),
       },

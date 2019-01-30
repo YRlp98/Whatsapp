@@ -116,7 +116,7 @@ class LoginScreenState extends State<LoginScreen>
     if (response['status'] == 'success') {
       await storeUserData(response['data']);
       await _loginButtonController.forward();
-      Navigator.pushReplacementNamed(context, '/');
+      Navigator.pushReplacementNamed(context, '/home');
     } else {
       await _loginButtonController.reverse();
       _scaffoldKey.currentState.showSnackBar(new SnackBar(

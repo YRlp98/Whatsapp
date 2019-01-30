@@ -22,11 +22,11 @@ class SplashScreenState extends State<SplashScreen> {
 //  }
 
   navigationToLogin() {
-    Navigator.of(context).pushReplacementNamed('login_screen');
+    Navigator.of(context).pushReplacementNamed('/login_screen');
   }
 
   navigationToHome() {
-    Navigator.of(context).pushReplacementNamed('/');
+    Navigator.of(context).pushReplacementNamed('/home');
   }
 
   @override
