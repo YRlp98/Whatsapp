@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/call_screen.dart';
 import 'pages/camera_screen.dart';
 import 'pages/chat_screen.dart';
@@ -60,7 +61,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
           },
         ),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 5.0)),
-        PopupMenuButton<String>(onSelected: (String choice) {
+        PopupMenuButton<String>(onSelected: (String choice) async {
           if (choice == 'settings') {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SettingsScreen()));
@@ -69,20 +70,35 @@ class WhatsAppHomeState extends State<WhatsAppHome>
 //                MaterialPageRoute(builder: (context) => CreateChatScreen()));
 //          OR:
             Navigator.pushNamed(context, '/settings');
+          } else if (choice == 'logout') {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.remove('user.api_token');
+            Navigator.of(context).pushReplacementNamed('/login_screen');
           }
         }, itemBuilder: (BuildContext context) {
           return [
-            PopupMenuItem(
+            new PopupMenuItem(
                 value: 'new_group',
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[Text('گروه جدید')],
+                  children: <Widget>[new Text('گروه جدید')],
                 )),
-            PopupMenuItem(
+            new PopupMenuItem(
                 value: 'settings',
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[Text('تنظیمات')],
+                  children: <Widget>[new Text('تنظیمات')],
+                )),
+            new PopupMenuItem(
+                value: 'logout',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    new Text(
+                      'خروج',
+                      style: new TextStyle(color: Colors.red),
+                    )
+                  ],
                 )),
           ];
         }),
