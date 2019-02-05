@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:whatsapp/helper.dart';
 import 'package:whatsapp/services/auth_services.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -110,10 +111,4 @@ class SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  Future<bool> checkConnectionInternet() async {
-    var connectivityResult = await (new Connectivity().checkConnectivity());
-    print(connectivityResult);
-    return connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi;
-  }
 }

@@ -8,8 +8,8 @@ class ProductsScreen extends StatefulWidget {
   State<StatefulWidget> createState() => new ProductsScreenState();
 }
 
-class ProductsScreenState extends State<ProductsScreen>
-    with AutomaticKeepAliveClientMixin<ProductsScreen> {
+//with AutomaticKeepAliveClientMixin<ProductsScreen>
+class ProductsScreenState extends State<ProductsScreen> {
   List<Product> _products = [];
   int _currentPage = 1;
   bool _viewStream = true;
