@@ -9,7 +9,7 @@ class Provider {
     var databasesPath = await getDatabasesPath();
     _path = join(databasesPath, dbName);
 
-    db = await openDatabase(_path, version: 1,
+    db = await openDatabase(_path, version: 2,
         onCreate: (Database db, int version) async {
       await db.execute('''
         create table products ( 
@@ -21,6 +21,12 @@ class Provider {
           price text not null,
           created_at text not null,
           updated_at text not null)
+          ''');
+    }, onUpgrade: (Database db, int oldVersion, int newVersion) async {
+      await db.execute('''
+        create table products ( 
+          id integer primary key autoincrement,
+          api_token text not null)
           ''');
     });
   }
