@@ -22,6 +22,9 @@ class MapScreenState extends State<MapScreen> {
               height: 200.0,
               child: GoogleMap(
                 onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(51.5160895, -0.1294527),
+                ),
               ),
             ),
           ),
@@ -31,6 +34,8 @@ class MapScreenState extends State<MapScreen> {
   }
 
   void _onMapCreated(GoogleMapController controller) {
-    setState(() { mapController = controller; });
+    setState(() {
+      mapController = controller;
+    });
   }
 }
