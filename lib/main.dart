@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/pages/login_screen.dart';
+import 'package:whatsapp/pages/map_screen.dart';
 import 'package:whatsapp/pages/splash_screen.dart';
 import 'whatsapp_home.dart';
 import 'package:whatsapp/pages/settings_screen.dart';
@@ -19,14 +20,16 @@ class MyApp extends StatelessWidget {
           accentColor: Color(0xff25d366)),
 //      initialRoute: 'splash_screen',
       routes: {
-        '/': (context) => Directionality(
-            textDirection: TextDirection.rtl, child: SplashScreen()),
-        '/login_screen': (context) => Directionality(
-            textDirection: TextDirection.rtl, child: LoginScreen()),
-        '/home': (context) => Directionality(
-            textDirection: TextDirection.rtl, child: WhatsAppHome()),
-        '/settings': (context) => SettingsScreen(),
-        '/new_chat': (context) => CreateChatScreen(),
+//        '/': (context) => new Directionality(
+//            textDirection: TextDirection.rtl, child: new SplashScreen()),
+        '/': (context) => new Directionality(
+            textDirection: TextDirection.rtl, child: new MapScreen()),
+        '/login_screen': (context) => new Directionality(
+            textDirection: TextDirection.rtl, child: new LoginScreen()),
+        '/home': (context) => new Directionality(
+            textDirection: TextDirection.rtl, child: new WhatsAppHome()),
+        '/settings': (context) => new SettingsScreen(),
+        '/new_chat': (context) => new CreateChatScreen(),
       },
       debugShowCheckedModeBanner: false,
 //        home: Directionality(
