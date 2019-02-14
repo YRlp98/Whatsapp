@@ -18,12 +18,12 @@ class MapScreenState extends State<MapScreen> {
         children: <Widget>[
           Center(
             child: SizedBox(
-              width: 300.0,
-              height: 200.0,
+              width: 400.0,
+              height: 600.0,
               child: GoogleMap(
                 onMapCreated: _onMapCreated,
                 initialCameraPosition: CameraPosition(
-                  target: LatLng(51.5160895, -0.1294527),
+                  target: LatLng(35.715298, 	51.404343),
                 ),
               ),
             ),
