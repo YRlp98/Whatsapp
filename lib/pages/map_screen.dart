@@ -9,7 +9,8 @@ class MapScreen extends StatefulWidget {
 class MapScreenState extends State<MapScreen> {
   GoogleMapController mapController;
   CameraPosition _position =
-      new CameraPosition(target: LatLng(35.715298, 51.404343), zoom: 8);
+      new CameraPosition(target: LatLng(35.715298, 51.404343), zoom: 5);
+  MapType _currentMapType = MapType.normal;
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +40,43 @@ class MapScreenState extends State<MapScreen> {
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           new GoogleMap(
-            onMapCreated: _onMapCreated,
-            myLocationEnabled: true,
-            mapType: MapType.satellite,
+              onMapCreated: _onMapCreated,
+              myLocationEnabled: true,
+              mapType: _currentMapType,
 //            TODO: set _position!
-            initialCameraPosition: CameraPosition(
-              target: LatLng(35.715298, 51.404343),
+              initialCameraPosition: _position),
+          new Padding(
+            padding: const EdgeInsets.only(bottom: 20, left: 16),
+            child: new Align(
+              alignment: Alignment.bottomLeft,
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  new FloatingActionButton(
+                    onPressed: () {
+                      _onMapTypeButtonPressed;
+                    },
+                    backgroundColor: Colors.green,
+                    child: const Icon(
+                      Icons.map,
+                      size: 36,
+                      color: Colors.white,
+                    ),
+                  ),
+                  new SizedBox(height: 16),
+                  new FloatingActionButton(
+                    onPressed: () {},
+                    backgroundColor: Colors.green,
+                    child: const Icon(
+                      Icons.add_location,
+                      size: 36,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
@@ -57,5 +87,13 @@ class MapScreenState extends State<MapScreen> {
 //      mapController = controller;
 //    });
     mapController = controller;
+  }
+
+  void _onMapTypeButtonPressed() {
+    if (_currentMapType == MapType.normal) {
+      _currentMapType = MapType.satellite;
+    } else {
+      _currentMapType = MapType.normal;
+    }
   }
 }
