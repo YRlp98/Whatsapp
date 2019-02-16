@@ -8,6 +8,8 @@ class MapScreen extends StatefulWidget {
 
 class MapScreenState extends State<MapScreen> {
   GoogleMapController mapController;
+  CameraPosition _position =
+      new CameraPosition(target: LatLng(35.715298, 51.404343), zoom: 8);
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +40,12 @@ class MapScreenState extends State<MapScreen> {
         children: <Widget>[
           new GoogleMap(
             onMapCreated: _onMapCreated,
+            myLocationEnabled: true,
+            mapType: MapType.satellite,
+//            TODO: set _position!
             initialCameraPosition: CameraPosition(
               target: LatLng(35.715298, 51.404343),
             ),
-          ),
-          new RaisedButton(
-            onPressed: () {
-              mapController.animateCamera(CameraUpdate.newCameraPosition(
-                  const CameraPosition(target: LatLng(51.5074, 0.1278),
-                  zoom: 8
-                  )));
-            },
-            child: new Text('Go to Iran '),
           ),
         ],
       ),
