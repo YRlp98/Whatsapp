@@ -45,7 +45,9 @@ class MapScreenState extends State<MapScreen> {
           new RaisedButton(
             onPressed: () {
               mapController.animateCamera(CameraUpdate.newCameraPosition(
-                  const CameraPosition(target: LatLng(51.5074, 0.1278))));
+                  const CameraPosition(target: LatLng(51.5074, 0.1278),
+                  zoom: 8
+                  )));
             },
             child: new Text('Go to Iran '),
           ),
