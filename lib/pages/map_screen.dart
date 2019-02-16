@@ -55,7 +55,7 @@ class MapScreenState extends State<MapScreen> {
                     child: new Row(
                       children: <Widget>[
                         new Text(
-                          'موقعیت:  ${_position.target.longitude}, ${_position.target.latitude}',
+                          'موقعیت:  ${_position.target.longitude.toStringAsFixed(3)}, ${_position.target.latitude.toStringAsFixed(3)}',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
