@@ -41,21 +41,38 @@ class MapScreenState extends State<MapScreen> {
         children: <Widget>[
           new GoogleMap(
               onMapCreated: _onMapCreated,
+              trackCameraPosition: true,
               myLocationEnabled: true,
               mapType: _currentMapType,
 //            TODO: set _position!
               initialCameraPosition: _position),
+          new Row(
+            children: <Widget>[
+              Expanded(
+                child: new Container(
+                    height: 50,
+                    decoration: new BoxDecoration(color: Colors.black45),
+                    child: new Row(
+                      children: <Widget>[
+                        new Text(
+                          'موقعیت:  ${_position.target.longitude}, ${_position.target.latitude}',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )),
+              )
+            ],
+          ),
           new Padding(
-            padding: const EdgeInsets.only(bottom: 20, left: 16),
+            padding: const EdgeInsets.only(bottom: 66, left: 16),
             child: new Align(
               alignment: Alignment.bottomLeft,
               child: new Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   new FloatingActionButton(
-                    onPressed: () {
-                      _onMapTypeButtonPressed;
-                    },
+                    onPressed: _onMapTypeButtonPressed,
                     backgroundColor: Colors.green,
                     child: const Icon(
                       Icons.map,
@@ -65,7 +82,7 @@ class MapScreenState extends State<MapScreen> {
                   ),
                   new SizedBox(height: 16),
                   new FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: _onAddMarkerButtonPressed,
                     backgroundColor: Colors.green,
                     child: const Icon(
                       Icons.add_location,
@@ -87,6 +104,13 @@ class MapScreenState extends State<MapScreen> {
 //      mapController = controller;
 //    });
     mapController = controller;
+    mapController.addListener(_onMapChanged);
+  }
+
+  void _onMapChanged() {
+    setState(() {
+      _position = mapController.cameraPosition;
+    });
   }
 
   void _onMapTypeButtonPressed() {
@@ -95,5 +119,14 @@ class MapScreenState extends State<MapScreen> {
     } else {
       _currentMapType = MapType.normal;
     }
+  }
+
+  void _onAddMarkerButtonPressed() {
+    mapController.addMarker(MarkerOptions(
+        position: LatLng(mapController.cameraPosition.target.latitude,
+            mapController.cameraPosition.target.longitude),
+        draggable: true,
+        infoWindowText: InfoWindowText('Josi Map', 'This is Josi Map!'),
+        icon: BitmapDescriptor.defaultMarker));
   }
 }
