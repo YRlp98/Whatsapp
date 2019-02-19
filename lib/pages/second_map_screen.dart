@@ -12,7 +12,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
 
   Location _location = new Location();
   bool _permission = false;
-  String ereor;
+  String error;
 
   @override
   void initState() {
@@ -27,7 +27,18 @@ class MapLocationScreenState extends State<MapLocationScreen> {
     try {
       _permission = await _location.hasPermission();
       location = await _location.getLocation();
-    } catch (e) {}
+
+      error = null;
+    } catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied!';
+      } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
+        error =
+            'Permission denied - Please ask the user to enable it from the app setting';
+      }
+
+      location = null;
+    }
   }
 
   @override
