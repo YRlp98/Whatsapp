@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/pages/login_screen.dart';
 import 'package:whatsapp/pages/map_screen.dart';
+import 'package:whatsapp/pages/second_map_screen.dart';
 import 'package:whatsapp/pages/splash_screen.dart';
 import 'whatsapp_home.dart';
 import 'package:whatsapp/pages/settings_screen.dart';
@@ -22,8 +23,10 @@ class MyApp extends StatelessWidget {
       routes: {
 //        '/': (context) => new Directionality(
 //            textDirection: TextDirection.rtl, child: new SplashScreen()),
+//        '/': (context) => new Directionality(
+//            textDirection: TextDirection.rtl, child: new MapScreen()),
         '/': (context) => new Directionality(
-            textDirection: TextDirection.rtl, child: new MapScreen()),
+            textDirection: TextDirection.rtl, child: new MapLocationScreen()),
         '/login_screen': (context) => new Directionality(
             textDirection: TextDirection.rtl, child: new LoginScreen()),
         '/home': (context) => new Directionality(
