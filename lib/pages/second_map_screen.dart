@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -23,6 +24,12 @@ class MapLocationScreenState extends State<MapLocationScreen> {
     super.initState();
 
     initPlatformState();
+
+    _location.onLocationChanged().listen((Map<String, double> currentLocation) {
+      setState(() {
+        _currentLocation = currentLocation;
+      });
+    });
   }
 
   initPlatformState() async {
@@ -33,7 +40,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
       location = await _location.getLocation();
 
       error = null;
-    } catch (e) {
+    } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
         error = 'Permission denied!';
       } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
@@ -48,13 +55,13 @@ class MapLocationScreenState extends State<MapLocationScreen> {
       _startLocation = location;
       _position = new CameraPosition(
           target: LatLng(location['latitude'], location['longitude']),
-          zoom: 18);
+          zoom: 15);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widget;
+    List<Widget> widget = new List();
     var size = MediaQuery.of(context).size;
 
     widget.add(new SizedBox(
@@ -88,6 +95,7 @@ class MapLocationScreenState extends State<MapLocationScreen> {
 
     return new Scaffold(
       appBar: new AppBar(
+        centerTitle: true,
         title: new Text('User Location'),
       ),
       body: new Column(
