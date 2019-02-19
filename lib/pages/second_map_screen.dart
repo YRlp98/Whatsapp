@@ -69,6 +69,23 @@ class MapLocationScreenState extends State<MapLocationScreen> {
               )
             : new SizedBox()));
 
+    widget.add(new Center(
+      child: new Text(_startLocation != null
+          ? 'Start Location: $_startLocation \n'
+          : 'Error: $error \n'),
+    ));
+
+    widget.add(new Center(
+      child: new Text(_currentLocation != null
+          ? 'Continuous Location: $_currentLocation \n'
+          : 'Error: $error \n'),
+    ));
+
+    widget.add(new Center(
+      child:
+          new Text(_permission ? 'Has Permission: Yes' : 'Has Permission: No'),
+    ));
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('User Location'),
