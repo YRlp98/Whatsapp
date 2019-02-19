@@ -29,6 +29,14 @@ class MapLocationScreenState extends State<MapLocationScreen> {
       setState(() {
         _currentLocation = currentLocation;
       });
+
+      if (_mapController != null) {
+        _mapController.animateCamera(CameraUpdate.newCameraPosition(
+            new CameraPosition(
+                target: LatLng(
+                    currentLocation['latitude'], currentLocation['longitude']),
+                zoom: 15)));
+      }
     });
   }
 
