@@ -20,8 +20,12 @@ class SecondMapScreenState extends State<SecondMapScreen> {
         title: new Text('MapBox'),
       ),
       body: new FlutterMap(
-        options:
-            new MapOptions(center: new LatLng(35.715298, 51.404343), zoom: 5),
+        options: new MapOptions(
+            center: new LatLng(35.715298, 51.404343),
+            zoom: 15,
+            onTap: (LatLng point) {
+              print(point);
+            }),
         layers: [
           new TileLayerOptions(
             urlTemplate: "https://api.tiles.mapbox.com/v4/"
