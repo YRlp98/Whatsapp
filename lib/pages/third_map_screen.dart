@@ -11,6 +11,7 @@ class SecondMapScreenState extends State<SecondMapScreen> {
   MapController _mapController = new MapController();
   String _accessToken =
       'pk.eyJ1IjoieXJscDk4IiwiYSI6ImNqc2Q5dG81bDA5b2Q0NnFvcXlybWFvdG0ifQ.JpCWDyk-k80JhRJqmIBGBA';
+  List<Marker> _markers = <Marker>[];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,18 @@ class SecondMapScreenState extends State<SecondMapScreen> {
             center: new LatLng(35.715298, 51.404343),
             zoom: 15,
             onTap: (LatLng point) {
-              print(point);
+              setState(() {
+                _markers.add(new Marker(
+                    width: 40,
+                    height: 40,
+                    point: point,
+                    builder: (context) {
+                      return new Container(
+                        child: new Image.asset(
+                            'assets/images/whatsapp_start_icon.png'),
+                      );
+                    }));
+              });
             }),
         layers: [
           new TileLayerOptions(
@@ -35,17 +47,7 @@ class SecondMapScreenState extends State<SecondMapScreen> {
               'id': 'mapbox.streets',
             },
           ),
-          new MarkerLayerOptions(markers: [
-            new Marker(
-                height: 40,
-                width: 40,
-                point: new LatLng(35.715298, 51.404343),
-                builder: (context) {
-                  return new Container(
-                    child: new FlutterLogo(),
-                  );
-                })
-          ])
+          new MarkerLayerOptions(markers: _markers)
         ],
         mapController: _mapController,
       ),
