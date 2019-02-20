@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 class SecondMapScreen extends StatefulWidget {
   @override
@@ -11,7 +9,11 @@ class SecondMapScreen extends StatefulWidget {
 class SecondMapScreenState extends State<SecondMapScreen> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Map'),
+      ),
+      body: new FlutterMap(options: null),
+    );
   }
 }
