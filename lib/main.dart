@@ -3,6 +3,7 @@ import 'package:whatsapp/pages/login_screen.dart';
 import 'package:whatsapp/pages/map_screen.dart';
 import 'package:whatsapp/pages/second_map_screen.dart';
 import 'package:whatsapp/pages/splash_screen.dart';
+import 'package:whatsapp/pages/third_map_screen.dart';
 import 'whatsapp_home.dart';
 import 'package:whatsapp/pages/settings_screen.dart';
 import 'package:whatsapp/pages/create-chat_screen.dart';
@@ -25,8 +26,10 @@ class MyApp extends StatelessWidget {
 //            textDirection: TextDirection.rtl, child: new SplashScreen()),
 //        '/': (context) => new Directionality(
 //            textDirection: TextDirection.rtl, child: new MapScreen()),
+//        '/': (context) => new Directionality(
+//            textDirection: TextDirection.rtl, child: new MapLocationScreen()),
         '/': (context) => new Directionality(
-            textDirection: TextDirection.rtl, child: new MapLocationScreen()),
+            textDirection: TextDirection.rtl, child: new SecondMapScreen()),
         '/login_screen': (context) => new Directionality(
             textDirection: TextDirection.rtl, child: new LoginScreen()),
         '/home': (context) => new Directionality(
