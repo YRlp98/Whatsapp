@@ -17,11 +17,11 @@ class SecondMapScreenState extends State<SecondMapScreen> {
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
-        title: new Text('Map'),
+        title: new Text('MapBox'),
       ),
       body: new FlutterMap(
         options:
-            new MapOptions(center: new LatLng(35.715298, 51.404343), zoom: 18),
+            new MapOptions(center: new LatLng(35.715298, 51.404343), zoom: 5),
         layers: [
           new TileLayerOptions(
             urlTemplate: "https://api.tiles.mapbox.com/v4/"
@@ -31,6 +31,17 @@ class SecondMapScreenState extends State<SecondMapScreen> {
               'id': 'mapbox.streets',
             },
           ),
+          new MarkerLayerOptions(markers: [
+            new Marker(
+                height: 40,
+                width: 40,
+                point: new LatLng(35.715298, 51.404343),
+                builder: (context) {
+                  return new Container(
+                    child: new FlutterLogo(),
+                  );
+                })
+          ])
         ],
         mapController: _mapController,
       ),
