@@ -9,6 +9,8 @@ class SecondMapScreen extends StatefulWidget {
 
 class SecondMapScreenState extends State<SecondMapScreen> {
   MapController _mapController = new MapController();
+  String _accessToken =
+      'pk.eyJ1IjoieXJscDk4IiwiYSI6ImNqc2Q5dG81bDA5b2Q0NnFvcXlybWFvdG0ifQ.JpCWDyk-k80JhRJqmIBGBA';
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class SecondMapScreenState extends State<SecondMapScreen> {
         layers: [
           new TileLayerOptions(
             urlTemplate: "https://api.tiles.mapbox.com/v4/"
-                "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
+                "{id}/{z}/{x}/{y}@2x.png?access_token=${_accessToken}",
             additionalOptions: {
-              'accessToken': '<PUT_ACCESS_TOKEN_HERE>',
+              'accessToken': _accessToken,
               'id': 'mapbox.streets',
             },
           ),
