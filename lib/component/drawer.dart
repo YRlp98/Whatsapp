@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/pages/map_screen.dart';
+import 'package:whatsapp/pages/second_map_screen.dart';
 import 'package:whatsapp/pages/third_map_screen.dart';
 
 Drawer buildDrawerLayout(BuildContext context) {
@@ -86,8 +87,11 @@ Drawer buildDrawerLayout(BuildContext context) {
             'گوگل مپ',
           ),
           onTap: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => MapScreen()));
+            Navigator.pop(context); // To close drawer when we get back
+            Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => MapLocationScreen()));
           },
         ),
         new ListTile(
@@ -98,6 +102,7 @@ Drawer buildDrawerLayout(BuildContext context) {
             'مپ باکس',
           ),
           onTap: () {
+            Navigator.pop(context);
             Navigator.push(context,
                 new MaterialPageRoute(builder: (context) => SecondMapScreen()));
           },
