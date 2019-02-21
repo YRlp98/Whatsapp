@@ -170,7 +170,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
   Widget build(BuildContext context) {
     return new WillPopScope(
         child: new Scaffold(
-          drawer: buildDrawerLayout(),
+          drawer: buildDrawerLayout(context),
           body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {

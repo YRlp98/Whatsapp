@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/pages/map_screen.dart';
+import 'package:whatsapp/pages/third_map_screen.dart';
 
-Drawer buildDrawerLayout() {
+Drawer buildDrawerLayout(BuildContext context) {
   return new Drawer(
     child: new ListView(
       children: <Widget>[
@@ -26,7 +28,10 @@ Drawer buildDrawerLayout() {
                   new Align(
                     alignment: Alignment.topRight,
                     child: new ListTile(
-                      leading: new CircleAvatar(backgroundColor: Colors.grey),
+                      leading: new CircleAvatar(
+                        backgroundImage: new NetworkImage(
+                            'https://avatars2.githubusercontent.com/u/25505523?s=460&v=4'),
+                      ),
                       title: new Text(
                         'یوسف روشندل',
                         style: TextStyle(fontSize: 14, color: Colors.white),
@@ -59,7 +64,9 @@ Drawer buildDrawerLayout() {
           title: new Text(
             'محصولات',
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
         ),
         new ListTile(
           trailing: new Text('17'),
@@ -70,6 +77,30 @@ Drawer buildDrawerLayout() {
             'مورد علاقه',
           ),
           onTap: () {},
+        ),
+        new ListTile(
+          leading: new Icon(
+            Icons.location_on,
+          ),
+          title: new Text(
+            'گوگل مپ',
+          ),
+          onTap: () {
+            Navigator.push(context,
+                new MaterialPageRoute(builder: (context) => MapScreen()));
+          },
+        ),
+        new ListTile(
+          leading: new Icon(
+            Icons.map,
+          ),
+          title: new Text(
+            'مپ باکس',
+          ),
+          onTap: () {
+            Navigator.push(context,
+                new MaterialPageRoute(builder: (context) => SecondMapScreen()));
+          },
         ),
         new ListTile(
           leading: new Icon(
