@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whatsapp/component/drawer.dart';
 import 'pages/call_screen.dart';
 import 'pages/camera_screen.dart';
 import 'pages/chat_screen.dart';
@@ -33,7 +34,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
     SliverAppBar mainAppBar = SliverAppBar(
       pinned: true,
       floating: true,
-      automaticallyImplyLeading: false,
+//      automaticallyImplyLeading: false,
       title: Text('واتس اپ'),
       elevation: 5.0,
       bottom: TabBar(
@@ -167,9 +168,9 @@ class WhatsAppHomeState extends State<WhatsAppHome>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new WillPopScope(
         child: new Scaffold(
+          drawer: buildDrawerLayout(),
           body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
