@@ -22,14 +22,14 @@ class MyApp extends StatelessWidget {
           accentColor: Color(0xff25d366)),
 //      initialRoute: 'splash_screen',
       routes: {
-//        '/': (context) => new Directionality(
-//            textDirection: TextDirection.rtl, child: new SplashScreen()),
+        '/': (context) => new Directionality(
+            textDirection: TextDirection.rtl, child: new SplashScreen()),
 //        '/': (context) => new Directionality(
 //            textDirection: TextDirection.rtl, child: new MapScreen()),
 //        '/': (context) => new Directionality(
 //            textDirection: TextDirection.rtl, child: new MapLocationScreen()),
-        '/': (context) => new Directionality(
-            textDirection: TextDirection.rtl, child: new SecondMapScreen()),
+//        '/': (context) => new Directionality(
+//            textDirection: TextDirection.rtl, child: new SecondMapScreen()),
         '/login_screen': (context) => new Directionality(
             textDirection: TextDirection.rtl, child: new LoginScreen()),
         '/home': (context) => new Directionality(
