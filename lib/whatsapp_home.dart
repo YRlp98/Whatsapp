@@ -178,7 +178,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
             },
             body: _currentAppBar == 'mainAppBar'
                 ? TabBarView(controller: tabController, children: <Widget>[
-                    CameraScreen(),
+                    null /* CameraScreen() */,
                     ChatScreen(),
                     ProductsScreen(),
                     CallScreen()
