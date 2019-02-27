@@ -97,7 +97,7 @@ class CameraScreenState extends State<CameraScreen> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-//                 Switch Camera Bottom
+//                 Switch Camera Button
                 new IconButton(
                     icon: new Icon(
                       Icons.switch_camera,
@@ -106,8 +106,9 @@ class CameraScreenState extends State<CameraScreen> {
                     ),
                     onPressed: _cameraSwitchToggle),
 
-//                Capture and Record Bottom
+//                Capture and Record Button
                 new GestureDetector(
+                  onTap: _onTakePictureButtonPressed,
                   child: new Container(
                     width: 65,
                     height: 65,
@@ -123,7 +124,7 @@ class CameraScreenState extends State<CameraScreen> {
                   ),
                 ),
 
-//                Flash Bottom
+//                Flash Button
                 new IconButton(
                     icon: new Icon(
                       Icons.flash_off,
@@ -155,5 +156,20 @@ class CameraScreenState extends State<CameraScreen> {
     } else {
       _showSnackBar('Error: You can not change the camera');
     }
+  }
+
+  void _onTakePictureButtonPressed() {}
+
+  Future<String> takePicture() async {
+    final filePath = '';
+
+    try {
+//      _cameraController.takePicture(path);
+    } on CameraException catch (e) {
+      _showCameraException(e);
+      return null;
+    }
+
+    return filePath;
   }
 }
