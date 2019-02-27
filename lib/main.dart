@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/pages/camera_screen.dart';
 import 'package:whatsapp/pages/login_screen.dart';
 import 'package:whatsapp/pages/map_screen.dart';
 import 'package:whatsapp/pages/second_map_screen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
 //        '/': (context) => new Directionality(
 //            textDirection: TextDirection.rtl, child: new SplashScreen()),
         '/': (context) => new Directionality(
-            textDirection: TextDirection.rtl, child: new SplashScreen()),
+            textDirection: TextDirection.rtl, child: new CameraScreen()),
 //        '/': (context) => new Directionality(
 //            textDirection: TextDirection.rtl, child: new MapScreen()),
 //        '/': (context) => new Directionality(
