@@ -65,7 +65,7 @@ class CameraScreenState extends State<CameraScreen> {
     return new Scaffold(
       key: _scaffoldKey,
       body: new Stack(
-        children: <Widget>[_cameraPreviewWidget()],
+        children: <Widget>[_cameraPreviewWidget(), _cameraBottomSection()],
       ),
     );
   }
@@ -86,5 +86,45 @@ class CameraScreenState extends State<CameraScreen> {
         ),
       );
     }
+  }
+
+  Widget _cameraBottomSection() {
+    return new Align(
+      alignment: Alignment.bottomCenter,
+      child: new Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                new IconButton(
+                    icon: new Icon(
+                      Icons.switch_camera,
+                      size: 36,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {}),
+                new IconButton(
+                    icon: new Icon(
+                      Icons.add_circle_outline,
+                      size: 65,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {}),
+                new IconButton(
+                    icon: new Icon(
+                      Icons.flash_off,
+                      size: 36,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {})
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
