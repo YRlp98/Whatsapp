@@ -9,6 +9,7 @@ class CameraScreen extends StatefulWidget {
 class CameraScreenState extends State<CameraScreen> {
   CameraController _cameraController;
   List<CameraDescription> _cameras;
+  CameraDescription _cameraDescription;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -26,6 +27,7 @@ class CameraScreenState extends State<CameraScreen> {
   selectCamera({CameraDescription camera}) async {
     setState(() {
       _cameraController = CameraController(camera, ResolutionPreset.high);
+      _cameraDescription = camera;
     });
 
     _cameraController.addListener(() {
@@ -39,10 +41,6 @@ class CameraScreenState extends State<CameraScreen> {
       await _cameraController.initialize();
     } on CameraException catch (e) {
       _showCameraException(e);
-    }
-
-    if (mounted) {
-      setState(() {});
     }
   }
 
@@ -99,20 +97,33 @@ class CameraScreenState extends State<CameraScreen> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+//                 Switch Camera Bottom
                 new IconButton(
                     icon: new Icon(
                       Icons.switch_camera,
                       size: 36,
                       color: Colors.white,
                     ),
-                    onPressed: () {}),
-                new IconButton(
-                    icon: new Icon(
-                      Icons.add_circle_outline,
-                      size: 65,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {}),
+                    onPressed: _cameraSwitchToggle),
+
+//                Capture and Record Bottom
+                new GestureDetector(
+                  child: new Container(
+                    width: 65,
+                    height: 65,
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: new Border.all(
+                            width: 4,
+                            color: _cameraController != null &&
+                                    _cameraController.value.isRecordingVideo
+                                ? Colors.redAccent
+                                : Colors.white),
+                        shape: BoxShape.circle),
+                  ),
+                ),
+
+//                Flash Bottom
                 new IconButton(
                     icon: new Icon(
                       Icons.flash_off,
@@ -121,10 +132,28 @@ class CameraScreenState extends State<CameraScreen> {
                     ),
                     onPressed: () {})
               ],
+            ),
+            new Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: new Text(
+                'Hold to start recording the video',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
             )
           ],
         ),
       ),
     );
+  }
+
+  void _cameraSwitchToggle() {
+    if (_cameras.length >= 2) {
+      selectCamera(
+          camera:
+              _cameraDescription == _cameras[0] ? _cameras[1] : _cameras[0]);
+    } else {
+      _showSnackBar('Error: You can not change the camera');
+    }
   }
 }
