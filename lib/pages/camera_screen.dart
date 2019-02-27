@@ -72,13 +72,12 @@ class CameraScreenState extends State<CameraScreen> {
 
   Widget _cameraPreviewWidget() {
     if (_cameraController == null || !_cameraController.value.isInitialized) {
-      return new Text(
-        '\nError: No camera detected',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      return new Center(
+        child: new CircularProgressIndicator(),
       );
     } else {
       return new Transform.scale(
-        scale: 1,
+        scale: 1 / _cameraController.value.aspectRatio,
         child: new Center(
           child: AspectRatio(
             aspectRatio: _cameraController.value.aspectRatio,
