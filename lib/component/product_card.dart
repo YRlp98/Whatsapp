@@ -22,10 +22,14 @@ class ProductCard extends StatelessWidget {
             child: new CachedNetworkImage(
               imageUrl: product.image,
               fit: BoxFit.cover,
-              placeholder: new Image(
-                image: AssetImage('assets/images/placeholder_image.png'),
-                fit: BoxFit.cover,
-              ),
+//            TODO: To fix
+//              placeholder: new Image(
+//                image: AssetImage('assets/images/placeholder_image.png'),
+//                fit: BoxFit.cover,
+//              ),
+//            TODO: To fix
+              placeholder: (context, url) => new CircularProgressIndicator(),
+              errorWidget: (context, url, error) => new Icon(Icons.error),
             ),
           ),
           new Container(
