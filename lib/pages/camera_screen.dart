@@ -199,15 +199,15 @@ class CameraScreenState extends State<CameraScreen> {
   timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
   Future<void> _onStartRecordingVideo() async {
-    if (!_cameraController.value.isRecordingVideo) {
+    if (_cameraController.value.isRecordingVideo) {
       _showSnackBar('Camera is already recording video');
       return;
     }
 
     final Directory extDir = await getExternalStorageDirectory();
-    final String dirPath = '${extDir.path}/Pictures/whatsapp';
+    final String dirPath = '${extDir.path}/Movies/whatsapp';
     await Directory(dirPath).create(recursive: true);
-    final filePath = '$dirPath/${timestamp()}.jpg';
+    final filePath = '$dirPath/${timestamp()}.mp4';
 
     try {
       await _cameraController.startVideoRecording(filePath);
@@ -237,10 +237,20 @@ class CameraScreenState extends State<CameraScreen> {
       return;
     }
 
-    setState(() {
-      _files.add({'type': 'video', 'path': tempFilePath});
-    });
+    final Directory tempDir = await getTemporaryDirectory();
 
-    tempFilePath = null;
+    String thumb = await Thumbnails.getThumbnail(
+        thumbnailFolder: '${tempDir.path}/Pictures/whatsapp',
+        videoFile: 'tempFilePath',
+        imageType: ThumbFormat.JPEG,
+        quality: 60);
+
+    setState(() {
+      _files.add({'type': 'video', 'path': tempFilePath, 'thumb': thumb});
+
+      _showSnackBar('Videos saved in:\n${tempFilePath}');
+
+      tempFilePath = null;
+    });
   }
 }
