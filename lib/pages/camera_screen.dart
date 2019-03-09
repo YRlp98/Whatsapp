@@ -43,6 +43,10 @@ class CameraScreenState extends State<CameraScreen> {
     } on CameraException catch (e) {
       _showCameraException(e);
     }
+
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void _showSnackBar(String message) {
