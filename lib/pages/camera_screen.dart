@@ -13,6 +13,7 @@ class CameraScreenState extends State<CameraScreen> {
   CameraController _cameraController;
   List<CameraDescription> _cameras;
   CameraDescription _cameraDescription;
+  List _files = [];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -165,14 +166,24 @@ class CameraScreenState extends State<CameraScreen> {
     }
   }
 
-  void _onTakePictureButtonPressed() {}
+  void _onTakePictureButtonPressed() async {
+    String filePath = await takePicture();
+
+    setState(() {
+      _files.add({'type': 'image', 'path': filePath});
+    });
+
+    _showSnackBar('Picture saved in:\n$filePath');
+  }
 
   Future<String> takePicture() async {
-    final Directory extDir
-    final filePath = '';
+    final Directory extDir = await getExternalStorageDirectory();
+    final String dirPath = '${extDir.path}/Pictures/whatsapp';
+    await Directory(dirPath).create(recursive: true);
+    final filePath = '$dirPath/${timestamp()}.jpg';
 
     try {
-//      _cameraController.takePicture(path);
+      await _cameraController.takePicture(filePath);
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;
@@ -180,4 +191,6 @@ class CameraScreenState extends State<CameraScreen> {
 
     return filePath;
   }
+
+  timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 }
