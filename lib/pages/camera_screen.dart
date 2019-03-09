@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
@@ -166,6 +168,7 @@ class CameraScreenState extends State<CameraScreen> {
   void _onTakePictureButtonPressed() {}
 
   Future<String> takePicture() async {
+    final Directory extDir
     final filePath = '';
 
     try {
