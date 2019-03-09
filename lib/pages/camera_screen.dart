@@ -13,6 +13,7 @@ class CameraScreenState extends State<CameraScreen> {
   CameraController _cameraController;
   List<CameraDescription> _cameras;
   CameraDescription _cameraDescription;
+  String tempFilePath;
   List _files = [];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -117,6 +118,8 @@ class CameraScreenState extends State<CameraScreen> {
 //                Capture and Record Button
                 new GestureDetector(
                   onTap: _onTakePictureButtonPressed,
+                  onLongPress: _onStartRecordingVideo,
+                  onLongPressUp: _onStopRecordingVideo,
                   child: new Container(
                     width: 65,
                     height: 65,
@@ -193,4 +196,50 @@ class CameraScreenState extends State<CameraScreen> {
   }
 
   timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
+
+  Future<void> _onStartRecordingVideo() async {
+    if (!_cameraController.value.isRecordingVideo) {
+      _showSnackBar('Camera is already recording video');
+      return;
+    }
+
+    final Directory extDir = await getExternalStorageDirectory();
+    final String dirPath = '${extDir.path}/Pictures/whatsapp';
+    await Directory(dirPath).create(recursive: true);
+    final filePath = '$dirPath/${timestamp()}.jpg';
+
+    try {
+      await _cameraController.startVideoRecording(filePath);
+    } on CameraException catch (e) {
+      _showCameraException(e);
+    }
+
+    setState(() {
+      tempFilePath = filePath;
+    });
+  }
+
+  void _onStopRecordingVideo() async {
+    if (!_cameraController.value.isRecordingVideo) {
+      _showSnackBar('Camera is not recording');
+      return;
+    }
+
+    try {
+      await _cameraController.stopVideoRecording();
+    } on CameraException catch (e) {
+      _showCameraException(e);
+    }
+
+    if (tempFilePath == null) {
+      _showSnackBar('There is no file to save the video');
+      return;
+    }
+
+    setState(() {
+      _files.add({'type': 'video', 'path': tempFilePath});
+    });
+
+    tempFilePath = null;
+  }
 }
