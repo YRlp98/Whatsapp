@@ -111,17 +111,25 @@ class CameraScreenState extends State<CameraScreen> {
           children: <Widget>[
 //            Preview List
             new Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(bottom: 20, right: 5),
               child: new SizedBox(
                 height: 60,
                 width: screenSize.width,
                 child: new ListView.builder(
                     scrollDirection: Axis.horizontal,
+                    reverse: true,
                     itemCount: _files.length,
                     itemBuilder: (BuildContext context, int index) {
                       Map file = _files[index];
                       return new GestureDetector(
-                        child: new Image.file(File(file['path'])),
+                        child: new Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: new SizedBox(
+                            width: 70,
+                            child: new Image.file(File(file['path']),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
                       );
                     }),
               ),
