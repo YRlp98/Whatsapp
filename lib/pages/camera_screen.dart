@@ -73,7 +73,10 @@ class CameraScreenState extends State<CameraScreen> {
     return new Scaffold(
       key: _scaffoldKey,
       body: new Stack(
-        children: <Widget>[_cameraPreviewWidget(), _cameraBottomSection()],
+        children: <Widget>[
+          _cameraPreviewWidget(),
+          _cameraBottomSection(context)
+        ],
       ),
     );
   }
@@ -96,7 +99,9 @@ class CameraScreenState extends State<CameraScreen> {
     }
   }
 
-  Widget _cameraBottomSection() {
+  Widget _cameraBottomSection(context) {
+    var screenSize = MediaQuery.of(context).size;
+
     return new Align(
       alignment: Alignment.bottomCenter,
       child: new Padding(
@@ -104,6 +109,25 @@ class CameraScreenState extends State<CameraScreen> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+//            Preview List
+            new Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: new SizedBox(
+                height: 60,
+                width: screenSize.width,
+                child: new ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _files.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Map file = _files[index];
+                      return new GestureDetector(
+                        child: new Image.file(File(file['path'])),
+                      );
+                    }),
+              ),
+            ),
+
+//            Camera Buttons
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
