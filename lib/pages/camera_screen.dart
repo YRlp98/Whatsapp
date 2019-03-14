@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:thumbnails/thumbnails.dart';
+import 'package:whatsapp/pages/view_file_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -111,7 +112,7 @@ class CameraScreenState extends State<CameraScreen> {
           children: <Widget>[
 //            Preview List
             new Padding(
-              padding: const EdgeInsets.only(bottom: 20, right: 5),
+              padding: const EdgeInsets.only(bottom: 20),
               child: new SizedBox(
                 height: 60,
                 width: screenSize.width,
@@ -121,13 +122,40 @@ class CameraScreenState extends State<CameraScreen> {
                     itemCount: _files.length,
                     itemBuilder: (BuildContext context, int index) {
                       Map file = _files[index];
+                      String type = file['type'];
+
+                      String imagePath =
+                          type == 'image' ? file['path'] : file['thumb'];
+
                       return new GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      new ViewFileScreen(file: file)));
+                        },
                         child: new Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: new SizedBox(
                             width: 70,
-                            child: new Image.file(File(file['path']),
-                                fit: BoxFit.cover),
+                            child: new Stack(
+                              fit: StackFit.expand,
+                              children: <Widget>[
+                                new Image.file(File(imagePath),
+                                    fit: BoxFit.cover),
+                                type == 'video'
+                                    ? new Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: new Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 2, bottom: 2),
+                                            child: new Icon(Icons.camera_alt,
+                                                size: 18, color: Colors.white)),
+                                      )
+                                    : new SizedBox()
+                              ],
+                            ),
                           ),
                         ),
                       );
