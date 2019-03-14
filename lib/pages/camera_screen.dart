@@ -23,6 +23,7 @@ class CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
+
     initCamera();
   }
 
@@ -39,8 +40,8 @@ class CameraScreenState extends State<CameraScreen> {
 
     _cameraController.addListener(() {
       if (_cameraController.value.hasError) {
-        _showSnackBar(
-            'Camera Error: ${_cameraController.value.errorDescription}');
+        _showInSnackBar(
+            'Camera error ${_cameraController.value.errorDescription}');
       }
     });
 
@@ -55,9 +56,9 @@ class CameraScreenState extends State<CameraScreen> {
     }
   }
 
-  void _showSnackBar(String message) {
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(
-        content: Text(
+  void _showInSnackBar(String message) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: new Text(
       message,
       textDirection: TextDirection.rtl,
       style: TextStyle(fontFamily: 'Vazir'),
@@ -65,12 +66,13 @@ class CameraScreenState extends State<CameraScreen> {
   }
 
   void _showCameraException(CameraException e) {
-    print("Error: ${e.code}\nError Message: ${e.description}");
-    _showSnackBar('Error Message: ${e.description}');
+    print('Error : ${e.code}\nError Message : ${e.description}');
+    _showInSnackBar('Error Message : ${e.description}');
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return new Scaffold(
       key: _scaffoldKey,
       body: new Stack(
@@ -90,7 +92,7 @@ class CameraScreenState extends State<CameraScreen> {
     } else {
       return new Transform.scale(
         scale: 1 / _cameraController.value.aspectRatio,
-        child: new Center(
+        child: Center(
           child: AspectRatio(
             aspectRatio: _cameraController.value.aspectRatio,
             child: new CameraPreview(_cameraController),
@@ -102,29 +104,26 @@ class CameraScreenState extends State<CameraScreen> {
 
   Widget _cameraBottomSection(context) {
     var screenSize = MediaQuery.of(context).size;
-
     return new Align(
       alignment: Alignment.bottomCenter,
       child: new Padding(
-        padding: const EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.only(bottom: 20),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-//            Preview List
             new Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: EdgeInsets.only(bottom: 20),
               child: new SizedBox(
-                height: 60,
                 width: screenSize.width,
+                height: 60,
                 child: new ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    reverse: true,
                     itemCount: _files.length,
+                    reverse: true,
                     itemBuilder: (BuildContext context, int index) {
                       Map file = _files[index];
                       String type = file['type'];
-
-                      String imagePath =
+                      String ImagePath =
                           type == 'image' ? file['path'] : file['thumb'];
 
                       return new GestureDetector(
@@ -142,15 +141,14 @@ class CameraScreenState extends State<CameraScreen> {
                             child: new Stack(
                               fit: StackFit.expand,
                               children: <Widget>[
-                                new Image.file(File(imagePath),
-                                    fit: BoxFit.cover),
+                                Image.file(File(ImagePath), fit: BoxFit.cover),
                                 type == 'video'
                                     ? new Align(
                                         alignment: Alignment.bottomLeft,
                                         child: new Padding(
-                                            padding: const EdgeInsets.only(
+                                            padding: EdgeInsets.only(
                                                 left: 2, bottom: 2),
-                                            child: new Icon(Icons.camera_alt,
+                                            child: Icon(Icons.camera_alt,
                                                 size: 18, color: Colors.white)),
                                       )
                                     : new SizedBox()
@@ -162,29 +160,21 @@ class CameraScreenState extends State<CameraScreen> {
                     }),
               ),
             ),
-
-//            Camera Buttons
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-//                 Switch Camera Button
                 new IconButton(
-                    icon: new Icon(
-                      Icons.switch_camera,
-                      size: 36,
-                      color: Colors.white,
-                    ),
+                    icon: new Icon(Icons.switch_camera,
+                        size: 36, color: Colors.white),
                     onPressed: _cameraSwitchToggle),
-
-//                Capture and Record Button
                 new GestureDetector(
                   onTap: _onTakePictureButtonPressed,
-                  onLongPress: _onStartRecordingVideo,
-                  onLongPressUp: _onStopRecordingVideo,
+                  onLongPress: _onStartVideoRecording,
+                  onLongPressUp: _onStopVideoRecording,
                   child: new Container(
                     width: 65,
                     height: 65,
-                    decoration: BoxDecoration(
+                    decoration: new BoxDecoration(
                         color: Colors.transparent,
                         border: new Border.all(
                             width: 4,
@@ -195,24 +185,17 @@ class CameraScreenState extends State<CameraScreen> {
                         shape: BoxShape.circle),
                   ),
                 ),
-
-//                Flash Button
                 new IconButton(
-                    icon: new Icon(
-                      Icons.flash_off,
-                      size: 36,
-                      color: Colors.white,
-                    ),
+                    icon: new Icon(Icons.flash_off,
+                        size: 36, color: Colors.white),
                     onPressed: () {})
               ],
             ),
             new Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: new Text(
-                'Hold to start recording the video',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-              ),
+              child: new Text('نگه دارید فیلم بگیرید، بزنید تا عکس بگیرید',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
             )
           ],
         ),
@@ -226,7 +209,7 @@ class CameraScreenState extends State<CameraScreen> {
           camera:
               _cameraDescription == _cameras[0] ? _cameras[1] : _cameras[0]);
     } else {
-      _showSnackBar('Error: You can not change the camera');
+      _showInSnackBar('شما قادر به تغییر دوربین نیستید');
     }
   }
 
@@ -237,11 +220,11 @@ class CameraScreenState extends State<CameraScreen> {
       _files.add({'type': 'image', 'path': filePath});
     });
 
-    _showSnackBar('Picture saved in:\n$filePath');
+    _showInSnackBar('تصویر در آدرس زیر ذخیره شد \n $filePath');
   }
 
   Future<String> takePicture() async {
-    final Directory extDir = await getExternalStorageDirectory();
+    final Directory extDir = await getApplicationDocumentsDirectory();
     final String dirPath = '${extDir.path}/Pictures/whatsapp';
     await Directory(dirPath).create(recursive: true);
     final filePath = '$dirPath/${timestamp()}.jpg';
@@ -249,6 +232,7 @@ class CameraScreenState extends State<CameraScreen> {
     try {
       await _cameraController.takePicture(filePath);
     } on CameraException catch (e) {
+      print(e);
       _showCameraException(e);
       return null;
     }
@@ -258,13 +242,13 @@ class CameraScreenState extends State<CameraScreen> {
 
   timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
-  Future<void> _onStartRecordingVideo() async {
+  Future<void> _onStartVideoRecording() async {
     if (_cameraController.value.isRecordingVideo) {
-      _showSnackBar('Camera is already recording video');
+      _showInSnackBar('دوربین در حال ضبط است');
       return;
     }
 
-    final Directory extDir = await getExternalStorageDirectory();
+    final Directory extDir = await getApplicationDocumentsDirectory();
     final String dirPath = '${extDir.path}/Movies/whatsapp';
     await Directory(dirPath).create(recursive: true);
     final filePath = '$dirPath/${timestamp()}.mp4';
@@ -280,9 +264,9 @@ class CameraScreenState extends State<CameraScreen> {
     });
   }
 
-  void _onStopRecordingVideo() async {
+  void _onStopVideoRecording() async {
     if (!_cameraController.value.isRecordingVideo) {
-      _showSnackBar('Camera is not recording');
+      _showInSnackBar('دوربین در حال ضبط است');
       return;
     }
 
@@ -293,7 +277,7 @@ class CameraScreenState extends State<CameraScreen> {
     }
 
     if (tempFilePath == null) {
-      _showSnackBar('There is no file to save the video');
+      _showInSnackBar('فایلی برای متوقف شدن وجود ندارد.');
       return;
     }
 
@@ -301,14 +285,15 @@ class CameraScreenState extends State<CameraScreen> {
 
     String thumb = await Thumbnails.getThumbnail(
         thumbnailFolder: '${tempDir.path}/Pictures/whatsapp',
-        videoFile: 'tempFilePath',
+        // creates the specified path if it doesnt exist
+        videoFile: tempFilePath,
         imageType: ThumbFormat.JPEG,
         quality: 60);
 
     setState(() {
       _files.add({'type': 'video', 'path': tempFilePath, 'thumb': thumb});
 
-      _showSnackBar('Videos saved in:\n${tempFilePath}');
+      _showInSnackBar('ویدیو در مسیر زیر ذخیره شد \n\n ${tempFilePath}');
 
       tempFilePath = null;
     });
