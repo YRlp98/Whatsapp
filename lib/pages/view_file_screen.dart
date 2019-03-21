@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'camera_screen.dart';
-import 'package:whatsapp/models/chat_model.dart';
 
 class ViewFileScreen extends StatefulWidget {
   final Map file;
@@ -16,7 +14,6 @@ class ViewFileScreen extends StatefulWidget {
 class ViewFileScreenState extends State<ViewFileScreen> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: new Scaffold(
@@ -31,5 +28,7 @@ class ViewFileScreenState extends State<ViewFileScreen> {
     return new Image.file(File(widget.file['path']), fit: BoxFit.cover);
   }
 
-  _showVideo() {}
+  _showVideo() {
+
+  }
 }
