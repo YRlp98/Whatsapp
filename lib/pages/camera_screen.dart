@@ -27,6 +27,12 @@ class CameraScreenState extends State<CameraScreen> {
     initCamera();
   }
 
+  @override
+  void dispose() {
+    _cameraController.dispose();
+    super.dispose();
+  }
+
   initCamera() async {
     _cameras = await availableCameras();
     selectCamera(camera: _cameras[0]);
