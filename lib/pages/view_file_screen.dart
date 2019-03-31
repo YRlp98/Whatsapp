@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 class ViewFileScreen extends StatefulWidget {
   final Map file;
@@ -12,6 +13,7 @@ class ViewFileScreen extends StatefulWidget {
 }
 
 class ViewFileScreenState extends State<ViewFileScreen> {
+
   @override
   Widget build(BuildContext context) {
     return new Directionality(
