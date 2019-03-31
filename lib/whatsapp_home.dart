@@ -29,43 +29,49 @@ class WhatsAppHomeState extends State<WhatsAppHome>
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController = TabController(initialIndex: 1, length: 4, vsync: this);
+    tabController = new TabController(initialIndex: 1, length: 4, vsync: this);
+    tabController.addListener(() {
+      if (tabController.index == 0) {
+        tabController.index = tabController.previousIndex;
+        Navigator.pushNamed(context, '/camera');
+      }
+    });
 
     SliverAppBar mainAppBar = SliverAppBar(
       pinned: true,
       floating: true,
 //      automaticallyImplyLeading: false,
-      title: Text('واتس اپ'),
+      title: new Text('واتس اپ'),
       elevation: 5.0,
-      bottom: TabBar(
+      bottom: new TabBar(
           controller: tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            Tab(icon: Icon(Icons.camera_alt)),
-            Tab(
+            new Tab(icon: Icon(Icons.camera_alt)),
+            new Tab(
               text: 'چت ها',
             ),
-            Tab(
+            new Tab(
               text: 'محصولات',
             ),
-            Tab(
+            new Tab(
               text: 'تماس ها',
             )
           ]),
       actions: <Widget>[
-        GestureDetector(
-          child: Icon(Icons.search),
+        new GestureDetector(
+          child: new Icon(Icons.search),
           onTap: () {
             setState(() {
               _currentAppBar = 'searchAppBar';
             });
           },
         ),
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 5.0)),
-        PopupMenuButton<String>(onSelected: (String choice) async {
+        new Padding(padding: const EdgeInsets.symmetric(horizontal: 5.0)),
+        new PopupMenuButton<String>(onSelected: (String choice) async {
           if (choice == 'settings') {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()));
+                new MaterialPageRoute(builder: (context) => SettingsScreen()));
           } else if (choice == 'new_group') {
 //            Navigator.push(context,
 //                MaterialPageRoute(builder: (context) => CreateChatScreen()));
