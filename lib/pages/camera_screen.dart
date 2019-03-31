@@ -217,6 +217,8 @@ class CameraScreenState extends State<CameraScreen> {
     } else {
       _showInSnackBar('شما قادر به تغییر دوربین نیستید');
     }
+
+    if (mounted) setState(() {});
   }
 
   void _onTakePictureButtonPressed() async {

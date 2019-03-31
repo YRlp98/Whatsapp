@@ -25,6 +25,8 @@ class ViewFileScreenState extends State<ViewFileScreen> {
           VideoPlayerController.file(File(widget.file['path']));
 
       _videoPlayerController.addListener(() async {
+        print(_videoPlayerController.value.position);
+
         final bool isPlaying = _videoPlayerController.value.isPlaying;
 
         if (_isPlaying != isPlaying) {
@@ -57,12 +59,39 @@ class ViewFileScreenState extends State<ViewFileScreen> {
   }
 
   _showVideo() {
-    return _videoPlayerController ! -null
+    return _videoPlayerController != null &&
+            _videoPlayerController.value.initialized
         ? new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new AspectRatio(
-                aspectRatio: _videoPlayerController.value.aspectRatio,
+                aspectRatio: 1,
                 child: VideoPlayer(_videoPlayerController),
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new IconButton(
+                      icon: new Icon(
+                        _isPlaying ? Icons.pause : Icons.play_arrow,
+                        size: 36,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        if (_isPlaying) {
+                          await _videoPlayerController.pause();
+                        } else {
+                          await _videoPlayerController.play();
+                        }
+                      }),
+                  new IconButton(
+                      icon: new Icon(
+                        Icons.stop,
+                        size: 36,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {})
+                ],
               )
             ],
           )
