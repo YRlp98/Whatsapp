@@ -13,6 +13,32 @@ class ViewFileScreen extends StatefulWidget {
 }
 
 class ViewFileScreenState extends State<ViewFileScreen> {
+  VideoPlayerController _videoPlayerController;
+  bool _isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.file['type'] == 'video') {
+      _videoPlayerController =
+          VideoPlayerController.file(File(widget.file['path']));
+
+      _videoPlayerController.addListener(() async {
+        final bool isPlaying = _videoPlayerController.value.isPlaying;
+
+        if (_isPlaying != isPlaying) {
+          setState(() {
+            _isPlaying = isPlaying;
+          });
+        }
+      });
+
+      _videoPlayerController.initialize().then((_) {
+        setState(() {});
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +57,15 @@ class ViewFileScreenState extends State<ViewFileScreen> {
   }
 
   _showVideo() {
-
+    return _videoPlayerController ! -null
+        ? new Column(
+            children: <Widget>[
+              new AspectRatio(
+                aspectRatio: _videoPlayerController.value.aspectRatio,
+                child: VideoPlayer(_videoPlayerController),
+              )
+            ],
+          )
+        : new CircularProgressIndicator();
   }
 }
