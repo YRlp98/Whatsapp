@@ -25,9 +25,13 @@ class ViewFileScreenState extends State<ViewFileScreen> {
           VideoPlayerController.file(File(widget.file['path']));
 
       _videoPlayerController.addListener(() async {
-        print(_videoPlayerController.value.position);
-
         final bool isPlaying = _videoPlayerController.value.isPlaying;
+
+        if (_videoPlayerController.value.position >=
+            _videoPlayerController.value.duration) {
+          await _videoPlayerController.seekTo(new Duration(microseconds: 0));
+          await _videoPlayerController.pause();
+        }
 
         if (_isPlaying != isPlaying) {
           setState(() {
@@ -90,7 +94,11 @@ class ViewFileScreenState extends State<ViewFileScreen> {
                         size: 36,
                         color: Colors.white,
                       ),
-                      onPressed: () {})
+                      onPressed: () async {
+                        await _videoPlayerController.pause();
+                        await _videoPlayerController
+                            .seekTo(new Duration(microseconds: 0));
+                      })
                 ],
               )
             ],
