@@ -16,7 +16,7 @@ class SocketIoScreenState extends State<SocketIoScreen> {
   @override
   void initState() {
     super.initState();
-    _messages.addAll(dummyData);
+//    _messages.addAll(dummyData);
 
     _userId = new Random().nextInt(1000);
   }
@@ -47,8 +47,8 @@ class SocketIoScreenState extends State<SocketIoScreen> {
                             top: 5, bottom: 5, right: 10, left: 10),
                         decoration: new BoxDecoration(
                             color: _userId == _messages[index].id
-                                ? Colors.green : Colors.white
-                        ),
+                                ? Colors.green
+                                : Colors.white),
                         child: new Row(
                           children: <Widget>[
                             new Text(_messages[index].message)
@@ -70,7 +70,20 @@ class SocketIoScreenState extends State<SocketIoScreen> {
                       decoration: new InputDecoration(
                           hintText: 'تایپ کنید...', border: InputBorder.none),
                     )),
-                    new IconButton(icon: new Icon(Icons.send), onPressed: () {})
+                    new IconButton(
+                        icon: new Icon(Icons.send),
+                        onPressed: () {
+                          String msg = _textEditingController.text;
+
+                          if (_textEditingController.text.length > 0) {
+                            setState(() {
+//                            socket.io
+                              _messages
+                                  .add(ChatModel(id: _userId, message: msg));
+                              _textEditingController.text = '';
+                            });
+                          }
+                        })
                   ],
                 ),
               )

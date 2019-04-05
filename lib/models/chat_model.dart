@@ -1,5 +1,5 @@
 class ChatModel {
-  final String id;
+  final int id;
   final String name;
   final String message;
   final String time;
