@@ -37,6 +37,8 @@ class SocketIoScreenState extends State<SocketIoScreen> {
                     itemCount: _messages.length,
                     itemBuilder: (BuildContext context, int index) {
                       return new Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        decoration: new BoxDecoration(color: Colors.green),
                         child: new Row(
                           children: <Widget>[
                             new Text(_messages[index].message)

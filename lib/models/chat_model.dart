@@ -10,13 +10,13 @@ class ChatModel {
 List<ChatModel> dummyData = [
   ChatModel(
       name: 'Yousef Roshandel',
-      message: 'Salam! :|',
+      message: 'سلام :|',
       time: '05:05',
       avatarUrl:
           'https://lh6.googleusercontent.com/-HOemVlYejDk/AAAAAAAAAAI/AAAAAAAAF44/aCzKo-Ta66E/photo.jpg?sz=200'),
   ChatModel(
       name: 'Sembele Ghoz',
-      message: 'OH!',
+      message: 'اوه!',
       time: '04:04',
       avatarUrl:
           'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/3d/3d2219d9644f01e9c52b0959d13771b9f029a411_full.jpg'),
@@ -29,7 +29,7 @@ List<ChatModel> dummyData = [
   ),
   ChatModel(
     name: 'Arash Barahmand',
-    message: 'Salam :D',
+    message: 'سلام D:',
     time: '03:03',
     avatarUrl:
         'https://media.licdn.com/dms/image/C5603AQFUrwhCUSj0mA/profile-displayphoto-shrink_800_800/0?e=1550707200&v=beta&t=c8xecOnBri7-ysl2hGoDZD0rsjlJTrXgKBtHqHwVDtM',
@@ -43,7 +43,7 @@ List<ChatModel> dummyData = [
   ),
   ChatModel(
     name: 'Agha Mahdi',
-    message: 'Agha Yousef',
+    message: 'آقا یوسف',
     time: '03:03',
     avatarUrl:
         'https://media.licdn.com/dms/image/C4E03AQGJYHVJNlmriA/profile-displayphoto-shrink_800_800/0?e=1550707200&v=beta&t=LRQ06FOYwjf0ohxYAZ6rFS9YOMPgxnVsEssw2vRDag0',
