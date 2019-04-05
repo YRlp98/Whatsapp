@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:whatsapp/models/chat_model.dart';
 
@@ -9,11 +11,14 @@ class SocketIoScreen extends StatefulWidget {
 class SocketIoScreenState extends State<SocketIoScreen> {
   TextEditingController _textEditingController = new TextEditingController();
   List<ChatModel> _messages = [];
+  int _userId;
 
   @override
   void initState() {
     super.initState();
     _messages.addAll(dummyData);
+
+    _userId = new Random().nextInt(1000);
   }
 
   @override
@@ -38,7 +43,12 @@ class SocketIoScreenState extends State<SocketIoScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return new Container(
                         margin: const EdgeInsets.only(bottom: 5),
-                        decoration: new BoxDecoration(color: Colors.green),
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 5, right: 10, left: 10),
+                        decoration: new BoxDecoration(
+                            color: _userId == _messages[index].id
+                                ? Colors.green : Colors.white
+                        ),
                         child: new Row(
                           children: <Widget>[
                             new Text(_messages[index].message)
