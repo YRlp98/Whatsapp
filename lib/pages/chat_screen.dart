@@ -8,7 +8,7 @@ class ChatScreen extends StatelessWidget {
     // TODO: implement build
     return ListView.builder(
       padding: const EdgeInsets.only(top: 0),
-        itemCount: dummyDate.length,
+        itemCount: dummyData.length,
         itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
@@ -17,22 +17,22 @@ class ChatScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  _navigateAndDisplayContextMessage(context, dummyDate[index]);
+                  _navigateAndDisplayContextMessage(context, dummyData[index]);
                 },
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(dummyDate[index].avatarUrl),
+                    backgroundImage: NetworkImage(dummyData[index].avatarUrl),
                     backgroundColor: Colors.grey,
                   ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        dummyDate[index].name,
+                        dummyData[index].name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        dummyDate[index].time,
+                        dummyData[index].time,
                         style: TextStyle(color: Colors.grey, fontSize: 14.0),
                       )
                     ],
@@ -40,7 +40,7 @@ class ChatScreen extends StatelessWidget {
                   subtitle: Container(
                     padding: const EdgeInsets.only(top: 2.5),
                     child: Text(
-                      dummyDate[index].message,
+                      dummyData[index].message,
                       style: TextStyle(color: Colors.grey, fontSize: 15.0),
                     ),
                   ),

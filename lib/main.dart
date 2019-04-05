@@ -3,6 +3,7 @@ import 'package:whatsapp/pages/camera_screen.dart';
 import 'package:whatsapp/pages/login_screen.dart';
 import 'package:whatsapp/pages/map_screen.dart';
 import 'package:whatsapp/pages/second_map_screen.dart';
+import 'package:whatsapp/pages/socket_io_screen.dart';
 import 'package:whatsapp/pages/splash_screen.dart';
 import 'package:whatsapp/pages/third_map_screen.dart';
 import 'whatsapp_home.dart';
@@ -24,7 +25,9 @@ class MyApp extends StatelessWidget {
 //      initialRoute: 'splash_screen',
       routes: {
         '/': (context) => new Directionality(
-            textDirection: TextDirection.rtl, child: new SplashScreen()),
+            textDirection: TextDirection.rtl, child: new SocketIoScreen()),
+//        '/': (context) => new Directionality(
+//            textDirection: TextDirection.rtl, child: new SplashScreen()),
         '/login_screen': (context) => new Directionality(
             textDirection: TextDirection.rtl, child: new LoginScreen()),
         '/home': (context) => new Directionality(
