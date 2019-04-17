@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:whatsapp/models/chat_model.dart';
+import 'package:flutter_socket_io/flutter_socket_io.dart';
 
 class SocketIoScreen extends StatefulWidget {
   @override
