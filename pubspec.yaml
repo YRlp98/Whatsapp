@@ -33,6 +33,7 @@ dependencies:
   thumbnails: ^1.0.1
   video_player: ^0.7.2
   flutter_socket_io: ^0.4.6
+  image_picker: ^0.5.4
 
 dev_dependencies:
   flutter_test:
