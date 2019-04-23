@@ -4,6 +4,7 @@ import 'package:whatsapp/component/Form.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:whatsapp/services/auth_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whatsapp/translations.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -83,7 +84,7 @@ class LoginScreenState extends State<LoginScreen>
                 new FlatButton(
                     onPressed: null,
                     child: Text(
-                      "آیا هیچ اکانتی ندارید؟ عضویت",
+                    Translations.of(context).text('login_register_text'),
                       style: TextStyle(
                           fontWeight: FontWeight.w300,
                           letterSpacing: 0.5,

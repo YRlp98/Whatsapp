@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:whatsapp/helper.dart';
 import 'package:whatsapp/services/auth_services.dart';
+import 'package:whatsapp/translations.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -60,7 +61,7 @@ class SplashScreenState extends State<SplashScreen> {
                 ),
                 Padding(padding: const EdgeInsets.only(top: 8)),
                 Text(
-                  'واتس اپ',
+                  Translations.of(context).text('title'),
                   style: TextStyle(
                       fontFamily: 'Vazir',
                       color: Colors.white,
@@ -110,5 +111,4 @@ class SplashScreenState extends State<SplashScreen> {
           )));
     }
   }
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/translations.dart';
 import 'inputFields.dart';
 import 'package:validators/validators.dart';
 
@@ -12,7 +13,8 @@ class FormContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    print(Translations.of(context).currentLanguage);
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -23,27 +25,25 @@ class FormContainer extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   InputFieldsArea(
-                    hint: 'ایمیل کاربر',
-                    obscure: false,
-                    icon: Icons.person_outline,
-                    validator: (String value) {
-                      if (!isEmail(value)) {
-                        return 'لطفا ایمیل را بصورت صحصح وارد نمایید!';
-                      }
-                    },
-                    onSaved: emailOnSaved
-                  ),
+                      hint: Translations.of(context).text("email"),
+                      obscure: false,
+                      icon: Icons.person_outline,
+                      validator: (String value) {
+                        if (!isEmail(value)) {
+                          return 'لطفا ایمیل را بصورت صحصح وارد نمایید!';
+                        }
+                      },
+                      onSaved: emailOnSaved),
                   InputFieldsArea(
-                    hint: 'رمز عبور',
-                    obscure: true,
-                    icon: Icons.lock_outline,
-                    validator: (String value) {
-                      if (value.length < 5) {
-                        return 'طول پسورد باید بیش تر از 6 کارکتر باشد!';
-                      }
-                    },
-                    onSaved: passwordOnSaved
-                  )
+                      hint: Translations.of(context).text("password"),
+                      obscure: true,
+                      icon: Icons.lock_outline,
+                      validator: (String value) {
+                        if (value.length < 5) {
+                          return 'طول پسورد باید بیش تر از 6 کارکتر باشد!';
+                        }
+                      },
+                      onSaved: passwordOnSaved)
                 ],
               ))
         ],
