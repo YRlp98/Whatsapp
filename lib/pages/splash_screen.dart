@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:whatsapp/helper.dart';
 import 'package:whatsapp/services/auth_services.dart';
 import 'package:whatsapp/translations.dart';
@@ -10,7 +9,6 @@ import 'package:whatsapp/translations.dart';
 class SplashScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return SplashScreenState();
   }
 }
@@ -33,7 +31,6 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 //    startTime();
     checkLogin();
@@ -41,26 +38,25 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
+    return new Scaffold(
         key: _scaffoldKey,
         backgroundColor: Color(0xff075e54),
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Column(
+            new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
+                new Container(
                   width: 100,
                   height: 100,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
+                  decoration: new BoxDecoration(
+                      image: new DecorationImage(
                           image: AssetImage(
                               'assets/images/whatsapp_start_icon.png'))),
                 ),
                 Padding(padding: const EdgeInsets.only(top: 8)),
-                Text(
+                new Text(
                   Translations.of(context).text('title'),
                   style: TextStyle(
                       fontFamily: 'Vazir',
@@ -70,7 +66,7 @@ class SplashScreenState extends State<SplashScreen> {
                 )
               ],
             ),
-            Padding(
+            new Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: Align(
                   alignment: Alignment.bottomCenter,

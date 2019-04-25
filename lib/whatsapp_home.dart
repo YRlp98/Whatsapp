@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whatsapp/component/drawer.dart';
 import 'pages/call_screen.dart';
-import 'pages/camera_screen.dart';
 import 'pages/chat_screen.dart';
 import 'pages/products_screen.dart';
 import 'pages/create-chat_screen.dart';

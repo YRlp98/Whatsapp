@@ -4,7 +4,6 @@ import 'camera_screen.dart';
 class CreateChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
