@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whatsapp/all_translation.dart';
 import 'package:whatsapp/component/drawer.dart';
 import 'pages/call_screen.dart';
 import 'pages/chat_screen.dart';
@@ -26,7 +27,6 @@ class WhatsAppHomeState extends State<WhatsAppHome>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = new TabController(initialIndex: 1, length: 4, vsync: this);
     tabController.addListener(() {
@@ -40,7 +40,7 @@ class WhatsAppHomeState extends State<WhatsAppHome>
       pinned: true,
       floating: true,
 //      automaticallyImplyLeading: false,
-      title: new Text('واتس اپ'),
+      title: new Text(allTranslations.text('title')),
       elevation: 5.0,
       bottom: new TabBar(
           controller: tabController,

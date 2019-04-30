@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/all_translation.dart';
 
 class SelectLanguageScreen extends StatelessWidget {
   SelectLanguageScreen() {}
@@ -14,17 +15,29 @@ class SelectLanguageScreen extends StatelessWidget {
             new ListTile(
               title: new Text("انگلیسی"),
               onTap: () {
-                Navigator.pushNamed(context, '/settings/select_language');
+                _changeLanguage(context, 'en');
               },
-              trailing: new Icon(Icons.check),
+              trailing: checkLanguage('en'),
             ),
             new ListTile(
               title: new Text("فارسی"),
               onTap: () {
-                Navigator.pushNamed(context, '/settings/select_language');
+                _changeLanguage(context, 'fa');
               },
+              trailing: checkLanguage('fa'),
             ),
           ],
         ));
+  }
+
+  _changeLanguage(BuildContext context, String lang) async {
+    await allTranslations.setNewLanguage(lang);
+    Navigator.pushReplacementNamed(context, '/home');
+  }
+
+  checkLanguage(String lang) {
+    return allTranslations.currentLanguage == lang
+        ? new Icon(Icons.check)
+        : new SizedBox();
   }
 }
