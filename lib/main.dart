@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/all_translation.dart';
 import 'package:whatsapp/pages/camera_screen.dart';
-import 'package:whatsapp/pages/image_picker_screen.dart';
 import 'package:whatsapp/pages/login_screen.dart';
 import 'package:whatsapp/pages/select_language_screen.dart';
 import 'package:whatsapp/pages/splash_screen.dart';
-import 'package:whatsapp/translations.dart';
 import 'whatsapp_home.dart';
 import 'package:whatsapp/pages/settings_screen.dart';
 import 'package:whatsapp/pages/create-chat_screen.dart';

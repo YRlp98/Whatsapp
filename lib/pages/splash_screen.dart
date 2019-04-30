@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whatsapp/all_translation.dart';
 import 'package:whatsapp/helper.dart';
 import 'package:whatsapp/services/auth_services.dart';
 import 'package:whatsapp/translations.dart';
@@ -56,14 +57,11 @@ class SplashScreenState extends State<SplashScreen> {
                               'assets/images/whatsapp_start_icon.png'))),
                 ),
                 Padding(padding: const EdgeInsets.only(top: 8)),
-                new Text(
-                  Translations.of(context).text('title'),
-                  style: TextStyle(
-                      fontFamily: 'Vazir',
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold),
-                )
+                new Text(allTranslations.text('title'),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold))
               ],
             ),
             new Padding(

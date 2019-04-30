@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/all_translation.dart';
 import 'package:whatsapp/animations/signin_animation.dart';
 import 'package:whatsapp/component/Form.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
@@ -84,7 +85,7 @@ class LoginScreenState extends State<LoginScreen>
                 new FlatButton(
                     onPressed: null,
                     child: Text(
-                    Translations.of(context).text('login_register_text'),
+                    allTranslations.text('login_register_text'),
                       style: TextStyle(
                           fontWeight: FontWeight.w300,
                           letterSpacing: 0.5,

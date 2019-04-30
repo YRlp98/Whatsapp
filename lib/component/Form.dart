@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp/translations.dart';
+import 'package:whatsapp/all_translation.dart';
 import 'inputFields.dart';
 import 'package:validators/validators.dart';
 
@@ -13,7 +13,7 @@ class FormContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Translations.of(context).currentLanguage);
+    print(allTranslations.currentLanguage);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -25,7 +25,7 @@ class FormContainer extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   InputFieldsArea(
-                      hint: Translations.of(context).text("email"),
+                      hint: allTranslations.text("email"),
                       obscure: false,
                       icon: Icons.person_outline,
                       validator: (String value) {
@@ -35,7 +35,7 @@ class FormContainer extends StatelessWidget {
                       },
                       onSaved: emailOnSaved),
                   InputFieldsArea(
-                      hint: Translations.of(context).text("password"),
+                      hint: allTranslations.text("password"),
                       obscure: true,
                       icon: Icons.lock_outline,
                       validator: (String value) {
