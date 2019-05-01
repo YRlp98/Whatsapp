@@ -36,6 +36,7 @@ dependencies:
   video_player: ^0.7.2
   flutter_socket_io: ^0.4.6
   image_picker: ^0.4.12+1
+  firebase_messaging: ^2.0.0
 
 dev_dependencies:
   flutter_test:

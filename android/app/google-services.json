@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "957408040038",
+    "firebase_url": "https://flutterwhatsapp-a4f44.firebaseio.com",
+    "project_id": "flutterwhatsapp-a4f44",
+    "storage_bucket": "flutterwhatsapp-a4f44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957408040038:android:5246cd518c3829b4",
+        "android_client_info": {
+          "package_name": "ir.imuon.whatsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957408040038-mlelp4l7kt9478trv3pp701684ci70rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJBeRYLEP2E-Lz-gJ0S5Rbg42ektbFWng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957408040038-mlelp4l7kt9478trv3pp701684ci70rd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
