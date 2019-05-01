@@ -8,14 +8,38 @@ import 'whatsapp_home.dart';
 import 'package:whatsapp/pages/settings_screen.dart';
 import 'package:whatsapp/pages/create-chat_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() async{
+void main() async {
   await allTranslations.init('fa');
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
+      print("onMessage: $message");
+    }, onLaunch: (Map<String, dynamic> message) {
+      print("onLaunch: $message");
+    }, onResume: (Map<String, dynamic> message) {
+      print("onResume: $message");
+    });
+
+    _firebaseMessaging.getToken().then((String token) {
+      print("token: $token");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
