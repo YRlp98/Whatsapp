@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/pages/image_picker_screen.dart';
 import 'package:whatsapp/pages/map_screen.dart';
 import 'package:whatsapp/pages/second_map_screen.dart';
 import 'package:whatsapp/pages/third_map_screen.dart';
@@ -78,6 +79,21 @@ Drawer buildDrawerLayout(BuildContext context) {
             'مورد علاقه',
           ),
           onTap: () {},
+        ),
+        new ListTile(
+          leading: new Icon(
+            Icons.memory,
+          ),
+          title: new Text(
+            'گالری',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => ImagePickerScreen()));
+          },
         ),
         new ListTile(
           leading: new Icon(

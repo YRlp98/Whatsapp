@@ -20,7 +20,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/ic_launcher"
-        android:label="whatsapp">
+        android:label="Whatsapp">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBUflfO0zoNKB5UA6vmZZo-2rQS8ppY91k" />
