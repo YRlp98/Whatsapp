@@ -20,14 +20,10 @@ class ProductCard extends StatelessWidget {
             height: 200,
             width: screenSize.width,
             child: new CachedNetworkImage(
+              width: screenSize.width,
+              height: 200,
               imageUrl: product.image,
-              fit: BoxFit.cover,
-//            TODO: To fix
-//              placeholder: new Image(
-//                image: AssetImage('assets/images/placeholder_image.png'),
-//                fit: BoxFit.cover,
-//              ),
-//            TODO: To fix
+              fit: BoxFit.fill,
               placeholder: (context, url) => new CircularProgressIndicator(),
               errorWidget: (context, url, error) => new Icon(Icons.error),
             ),
