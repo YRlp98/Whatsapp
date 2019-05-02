@@ -25,6 +25,30 @@ class SingleProductScreen extends StatelessWidget {
                 height: 200,
                 imageUrl: product.image,
                 fit: BoxFit.cover,
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(10),
+                child: new Row(
+                  children: <Widget>[
+                    new Column(
+                      children: <Widget>[
+                        new Text(product.title,
+                            style: new TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        new Text(
+                          'قیمت: ${product.price} تومان',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    new FlatButton(
+                        onPressed: () {},
+                        child: new Text(
+                          'خرید محصول',
+                          style: TextStyle(color: Colors.white),
+                        ))
+                  ],
+                ),
               )
             ],
           ),
